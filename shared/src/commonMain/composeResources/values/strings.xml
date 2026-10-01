@@ -1,0 +1,52 @@
+<resources>
+
+    <!-- None -->
+    <string name="example">Example</string>
+    <string name="email_example">user@gmail</string>
+    <string name="password_example">Password123</string>
+
+
+    <!-- Error -->
+    <string name="error">Error</string>
+    <string name="please_try_again_later">Please try again later</string>
+
+    <!-- General -->
+    <string name="accept">Accept</string>
+    <string name="cancel">Cancel</string>
+    <string name="email_empty">Email empty</string>
+    <string name="password_empty">Password empty</string>
+    <string name="password_not_match">Password not match</string>
+    <string name="password_not_valid">Password not valid</string>
+
+    <!-- Welcome -->
+    <string name="welcome">Welcome</string>
+    <string name="hello">¡Hello!</string>
+    <string name="explore_our_multiplatform_platform">Explore our multi platform</string>
+    <string name="go_to_login">Go to login</string>
+
+    <!-- Login -->
+    <string name="login">Login</string>
+    <string name="login_title">FinTrack</string>
+    <string name="login_description">Tus finanzas, claras incluso sin conexión.</string>
+    <string name="login_email">Email</string>
+    <string name="login_password">Password</string>
+    <string name="login_login">Iniciar sesión</string>">
+    <string name="login_create_account">Crear una cuenta</string>">
+    
+    <!-- Register -->
+    <string name="register">Register</string>
+    <string name="register_title">FinTrack</string>
+    <string name="register_description">Registrate de forma gratuita y segura.</string>
+    <string name="register_name">Nombre</string>
+    <string name="register_email">Correo</string>
+    <string name="register_password">Contraseña</string>
+    <string name="register_confirm_password">Confirmar contraseña</string>
+    <string name="register_register_user">Registrar usuario</string>
+
+
+    <!-- Home -->
+    <string name="home">Home</string>
+    <string name="home_logout">Salir</string>
+
+
+</resources>
