@@ -4,22 +4,27 @@
  */
 package com.uagr.kmp.course.presentation.features.register.ui
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Adjust
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Password
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material.icons.filled.VisibilityOff
+import androidx.compose.material.icons.outlined.Airplay
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.input.ImeAction
@@ -27,14 +32,16 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import com.uagr.kmp.course.presentation.component.buton.ButtonCustom
+import com.uagr.kmp.course.presentation.component.buton.IconButtonCustom
 import com.uagr.kmp.course.presentation.component.container.SafeScreenContainerTest
 import com.uagr.kmp.course.presentation.component.field.TextFieldCustom
 import com.uagr.kmp.course.presentation.component.field.TextFieldPassword
 import com.uagr.kmp.course.presentation.component.text.TextCustom
+import com.uagr.kmp.course.presentation.features.register.viewmodel.RegisterUiState
 import com.uagr.kmp.course.presentation.theme.AppTheme
 import com.uagr.kmp.course.presentation.theme.Dimens
-import com.uagr.kmp.course.presentation.features.register.viewmodel.RegisterUiState
 import course.shared.generated.resources.Res
+import course.shared.generated.resources.ic_back_arrow
 import course.shared.generated.resources.register_confirm_password
 import course.shared.generated.resources.register_description
 import course.shared.generated.resources.register_email
@@ -42,6 +49,7 @@ import course.shared.generated.resources.register_name
 import course.shared.generated.resources.register_password
 import course.shared.generated.resources.register_register_user
 import course.shared.generated.resources.register_title
+import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
 
@@ -55,6 +63,7 @@ fun RegisterContainer(
     onConfirmPasswordChange: (String) -> Unit = {},
     onConfirmPasswordVisibleChange: (Boolean) -> Unit = {},
     onRegisterClick: () -> Unit = {},
+    onNavigateBackClick: () -> Unit = {},
 ) {
 
     val focusManager = LocalFocusManager.current
@@ -62,10 +71,29 @@ fun RegisterContainer(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(horizontal = Dimens.padding24)
-            .verticalScroll(rememberScrollState())
+            .padding(horizontal = Dimens.padding16)
+            .verticalScroll(rememberScrollState()),
+        verticalArrangement = Arrangement.Top,
+        horizontalAlignment = Alignment.Start,
     ) {
         Spacer(modifier = Modifier.height(Dimens.height16))
+
+        IconButtonCustom(
+            modifier = Modifier.size(Dimens.height20),
+            tint = AppTheme.colors.backgrounds.black,
+            icon = painterResource(Res.drawable.ic_back_arrow),
+            onClick = onNavigateBackClick
+        )
+
+        Spacer(modifier = Modifier.height(Dimens.height16))
+
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(horizontal = Dimens.padding16),
+            verticalArrangement = Arrangement.Top,
+            horizontalAlignment = Alignment.Start,
+        ) {
 
         TextCustom(
             modifier = Modifier.fillMaxWidth(),
@@ -79,7 +107,7 @@ fun RegisterContainer(
 
         TextCustom(
             modifier = Modifier.fillMaxWidth(),
-            color = AppTheme.colors.text.black,
+            color = AppTheme.colors.text.gray,
             style = AppTheme.typography.bodyNormal,
             text = stringResource(Res.string.register_description),
             textAlign = TextAlign.Left
@@ -157,6 +185,7 @@ fun RegisterContainer(
                 },
             ),
         )
+    }
 
         ButtonCustom(
             onClick = { onRegisterClick() },

@@ -16,6 +16,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -32,6 +33,7 @@ import com.uagr.kmp.course.presentation.theme.AppTheme
 import com.uagr.kmp.course.presentation.theme.Dimens
 import course.shared.generated.resources.Res
 import course.shared.generated.resources.example
+import course.shared.generated.resources.ic_back_arrow
 import course.shared.generated.resources.ic_example
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
@@ -100,6 +102,23 @@ fun CircularIconButtonCustom(
     }
 }
 
+
+@Composable
+fun IconButtonCustom(
+    modifier: Modifier = Modifier,
+    tint: Color = AppTheme.colors.text.black,
+    icon: Painter = painterResource(Res.drawable.ic_back_arrow),
+    onClick: () -> Unit = {}
+) {
+    Icon(
+        modifier = modifier.clickable {
+            onClick() },
+        painter = icon,
+        tint = tint,
+        contentDescription = null
+    )
+}
+
 @Preview(showBackground = true)
 @Composable
 private fun ButtonCustomPreview() {
@@ -120,6 +139,13 @@ private fun ButtonCustomPreview() {
                 borderColor = AppTheme.colors.primary,
                 iconColor = AppTheme.colors.primary,
                 icon = painterResource(Res.drawable.ic_example),
+            )
+
+            IconButtonCustom(
+                modifier = Modifier.size(Dimens.height20),
+                tint = AppTheme.colors.backgrounds.black,
+                icon = painterResource(Res.drawable.ic_back_arrow),
+                onClick = {}
             )
         }
     }

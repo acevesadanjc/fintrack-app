@@ -1,5 +1,5 @@
 /*
- * ValidateRegisterUseCase.kt
+ * RegisterValidationUseCase.kt
  * Copyright (c) 2026. All rights reserved
  */
 package com.uagr.kmp.course.domain.usecase.register
@@ -7,7 +7,7 @@ package com.uagr.kmp.course.domain.usecase.register
 import org.koin.core.annotation.Factory
 
 @Factory
-class ValidateRegisterUseCase {
+class RegisterValidationUseCase {
 
     operator fun invoke(
         password: String,

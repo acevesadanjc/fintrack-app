@@ -30,6 +30,7 @@ sealed interface RegisterUiEvent {
     data class OnConfirmPasswordChanged(val confirmPassword: String) : RegisterUiEvent
     data object OnToggleConfirmPasswordVisibility : RegisterUiEvent
     data object OnRegisterClicked : RegisterUiEvent
+    data object OnRegisterNavigateBack : RegisterUiEvent
     data object OnDismissErrorDialog : RegisterUiEvent
 }
 
@@ -40,10 +41,8 @@ data class RegisterUiState(
     val name: String = "",
     val email: String = "",
     val password: String = "",
-    //val passwordError: String? = null,
     val isPasswordVisible: Boolean = false,
     val confirmPassword: String = "",
-    //val confirmPasswordError: String? = null,
     val isConfirmPasswordVisible: Boolean = false,
     val isLoading: StatusLoading = StatusLoading.DISMISS_LOADING,
     val errorDialog: ErrorDialogModel? = null,
@@ -57,4 +56,5 @@ data class RegisterUiState(
  */
 sealed interface RegisterUiEffect {
     data object OnRegisterSuccess : RegisterUiEffect
+    data object OnRegisterNavigateBack : RegisterUiEffect
 }

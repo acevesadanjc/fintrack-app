@@ -1,14 +1,14 @@
 /*
- * RegisterViewModel.kt
+ * LoginViewModel.kt
  * Copyright (c) 2026. All rights reserved
  */
-package com.uagr.kmp.course.presentation.features.register.viewmodel
+package com.uagr.kmp.course.presentation.features.login.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.uagr.kmp.course.domain.model.base.ErrorDialogModel
-import com.uagr.kmp.course.domain.usecase.register.RegisterUseCase
-import com.uagr.kmp.course.domain.usecase.register.RegisterValidationUseCase
+import com.uagr.kmp.course.domain.usecase.login.LoginUseCase
+import com.uagr.kmp.course.domain.usecase.login.LoginValidationUseCase
 import com.uagr.kmp.course.utils.network.NetworkResult
 import com.uagr.kmp.course.utils.operators.StatusLoading
 import course.shared.generated.resources.Res
@@ -27,61 +27,33 @@ import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.getString
 import org.koin.core.annotation.KoinViewModel
 
-
 @KoinViewModel
-class RegisterViewModel(
-    private val registerUseCase: RegisterUseCase,
-    private val validationsUseCse: RegisterValidationUseCase,
+class LoginViewModel(
+    private val useCase: LoginUseCase,
+    private val validationsUseCase: LoginValidationUseCase,
 ): ViewModel() {
 
-    // Un solo StateFlow para toda la pantalla
-    private var _uiState = MutableStateFlow(RegisterUiState())
-    val uiState: StateFlow<RegisterUiState> = _uiState.asStateFlow()
+    private var _uiState = MutableStateFlow(LoginUiState())
+    val uiState: StateFlow<LoginUiState> = _uiState.asStateFlow()
 
-    // Canal para eventos de un solo disparo (navegación)
-    private val _uiEffect = Channel<RegisterUiEffect>()
+    private val _uiEffect = Channel<LoginUiEffect>()
     val uiEffect = _uiEffect.receiveAsFlow()
 
-    /**
-     * Helper para enviar effect hacia la UI
-     */
-    private fun sendEffect(effect: RegisterUiEffect) {
+    private fun sendEffect(effect: LoginUiEffect) {
         viewModelScope.launch {
             _uiEffect.send(effect)
         }
     }
 
-    /*
-    fun initStates() {
-        _uiState.update { state ->
-            state.copy(
-                name = "Test Name",
-                password = "Testing123*",
-                confirmPassword = "Testing123*",
-            )
-        }
-    }
-    */
-
-    /**
-     * Único punto de entrada de la UI hacia el ViewModel
-     */
-    fun onEvent(event: RegisterUiEvent) {
+    fun onEvent(event: LoginUiEvent) {
         when (event) {
-            is RegisterUiEvent.OnNameChanged -> updateName(event.name)
-            is RegisterUiEvent.OnEmailChanged -> updateEmail(event.email)
-            is RegisterUiEvent.OnPasswordChanged -> updatePassword(event.password)
-            is RegisterUiEvent.OnTogglePasswordVisibility -> updatePasswordVisible(uiState.value.isPasswordVisible.not())
-            is RegisterUiEvent.OnConfirmPasswordChanged -> updateConfirmPassword(event.confirmPassword)
-            is RegisterUiEvent.OnToggleConfirmPasswordVisibility -> updateConfirmPasswordVisible(uiState.value.isConfirmPasswordVisible.not())
-            is RegisterUiEvent.OnRegisterClicked -> validateFields()
-            is RegisterUiEvent.OnDismissErrorDialog -> dismissDialog()
-            is RegisterUiEvent.OnRegisterNavigateBack -> sendEffect(RegisterUiEffect.OnRegisterNavigateBack)
+            is LoginUiEvent.OnEmailChanged -> updateEmail(event.email)
+            is LoginUiEvent.OnPasswordChanged -> updatePassword(event.password)
+            is LoginUiEvent.OnTogglePasswordVisibility -> updatePasswordVisible(uiState.value.isPasswordVisible.not())
+            is LoginUiEvent.OnLoginClicked -> validateFields()
+            is LoginUiEvent.OnRegisterClicked -> sendEffect(LoginUiEffect.OnNavigateToRegister)
+            is LoginUiEvent.OnDismissErrorDialog -> dismissDialog()
         }
-    }
-
-    private fun updateName(name: String) = viewModelScope.launch {
-        _uiState.update { state -> state.copy(name = name) }
     }
 
     private fun updateEmail(email: String) = viewModelScope.launch {
@@ -96,19 +68,11 @@ class RegisterViewModel(
         _uiState.update { state -> state.copy(isPasswordVisible = isPasswordVisible) }
     }
 
-    private fun updateConfirmPassword(confirmPassword: String) = viewModelScope.launch {
-        _uiState.update { state -> state.copy(confirmPassword = confirmPassword) }
-    }
-
-    private fun updateConfirmPasswordVisible(isConfirmPasswordVisible: Boolean) = viewModelScope.launch {
-        _uiState.update { state -> state.copy(isConfirmPasswordVisible = isConfirmPasswordVisible) }
-    }
 
     private fun validateFields() {
         viewModelScope.launch {
-            val validateFields = validationsUseCse.invoke(
-                password = uiState.value.password,
-                confirmPassword = uiState.value.confirmPassword
+            val validateFields = validationsUseCase.invoke(
+                password = uiState.value.password
             )
             if (validateFields.hasError) {
                 _uiState.update { state ->
@@ -119,15 +83,14 @@ class RegisterViewModel(
                     )
                 }
             } else {
-                register()
+                login()
             }
         }
     }
 
-    private fun register() = viewModelScope.launch {
-        registerUseCase.register(
+    private fun login() = viewModelScope.launch {
+        useCase.login(
             email = uiState.value.email,
-            name = uiState.value.name,
             password = uiState.value.password
         ).onStart {
             _uiState.update { state -> state.copy(isLoading = StatusLoading.SHOW_LOADING) }
@@ -142,7 +105,7 @@ class RegisterViewModel(
             when(result) {
                 is NetworkResult.Success -> {
                     _uiState.update { state -> state.copy(isLoading = StatusLoading.DISMISS_LOADING) }
-                    sendEffect(RegisterUiEffect.OnRegisterSuccess)
+                    sendEffect(LoginUiEffect.OnLoginSuccess)
                 }
                 is NetworkResult.Error -> {
                     _uiState.update { state ->
@@ -157,9 +120,9 @@ class RegisterViewModel(
     }
 
     private suspend fun showErrorDialog(message: String? = null) = ErrorDialogModel(
-            title = getString(resource = Res.string.error),
-            message = message ?: getString(resource = Res.string.please_try_again_later),
-            primaryButtonText = getString(resource = Res.string.accept)
+        title = getString(resource = Res.string.error),
+        message = message ?: getString(resource = Res.string.please_try_again_later),
+        primaryButtonText = getString(resource = Res.string.accept)
     )
 
     private fun dismissDialog() = viewModelScope.launch {

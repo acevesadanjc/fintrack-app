@@ -56,11 +56,10 @@ val statusSuccessContainerLight = Color(0xFFEBF8F3)
 val textBlackLight = Color(0xFF1A1F29)
 val textWhiteLight = Color(0xFFFFFFFF)
 val textGrayLight = Color(0xFF7A8291)
-val textBlueSmallLight = Color(0xFF0D47A1)
+val textBlueSmallLight = Color(0xFF0F459E)
 val textLinkLight = Color(0xFF1470D1)
 val textPlaceholderLight = Color(0xFFA1A1A1)
 val textFieldLabelLight = Color(0xFF1F242E)
-val text = Color(0xFF0D47A1)
 
 // --- Dark Backgrounds Colors ---
 val backgroundBlackLight = Color(0xFF000000)

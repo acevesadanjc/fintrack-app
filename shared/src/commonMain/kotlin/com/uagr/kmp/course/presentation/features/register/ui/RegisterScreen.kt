@@ -26,6 +26,7 @@ import org.koin.compose.viewmodel.koinViewModel
 fun RegisterScreen(
     viewModel: RegisterViewModel = koinViewModel(),
     onNavigateToHome: () -> Unit = {},
+    onNavigateBack: () -> Unit = {},
 ) {
     SafeScreenContainer {
         val uiState by viewModel.uiState.collectAsStateWithLifecycle()
@@ -35,6 +36,7 @@ fun RegisterScreen(
             viewModel.uiEffect.collect { effect ->
                 when (effect) {
                     is RegisterUiEffect.OnRegisterSuccess -> onNavigateToHome()
+                    is RegisterUiEffect.OnRegisterNavigateBack -> onNavigateBack()
                 }
             }
         }
@@ -51,11 +53,14 @@ fun RegisterScreen(
             onConfirmPasswordVisibleChange = { viewModel.onEvent(RegisterUiEvent.OnToggleConfirmPasswordVisibility) },
             onRegisterClick = {
                 viewModel.onEvent(RegisterUiEvent.OnRegisterClicked)
+            },
+            onNavigateBackClick = {
+                viewModel.onEvent(RegisterUiEvent.OnRegisterNavigateBack)
             }
         )
 
         if (uiState.isLoading == StatusLoading.SHOW_LOADING) {
-            Loader()
+            Loader(isLoading = uiState.isLoading)
         }
 
         // Si es null se hace dismiss

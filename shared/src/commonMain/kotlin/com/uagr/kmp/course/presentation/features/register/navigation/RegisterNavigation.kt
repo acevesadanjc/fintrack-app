@@ -19,6 +19,11 @@ data object RegisterNavigation : Screen {
         RegisterScreen(
             onNavigateToHome = {
                 navigator.replaceAll(item = HomeNavigation)
+            },
+            onNavigateBack = {
+                if (navigator.canPop) {
+                    navigator.pop()
+                }
             }
         )
     }

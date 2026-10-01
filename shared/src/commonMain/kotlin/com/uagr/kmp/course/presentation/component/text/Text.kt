@@ -1,11 +1,19 @@
 package com.uagr.kmp.course.presentation.component.text
 
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.LinkAnnotation
@@ -101,6 +109,31 @@ fun TextUrlLink(
     )
 }
 
+@Composable
+fun TextButtonCustom(
+    modifier: Modifier,
+    color: Color = AppTheme.colors.primary,
+    text: String,
+    textStyle: TextStyle,
+    textAlign: TextAlign = TextAlign.Center,
+    onClick: () -> Unit = {}
+) {
+    Box(
+        modifier = modifier,
+        contentAlignment = Alignment.Center
+    ) {
+        Text(
+            modifier = modifier.clickable(
+                onClick = onClick
+            ),
+            text = text,
+            color = color,
+            style = textStyle,
+            textAlign = textAlign,
+        )
+    }
+}
+
 @Preview(
     showBackground = true,
 )
@@ -126,6 +159,12 @@ private fun TextPreview() {
                 text = stringResource(Res.string.example),
                 linkText = stringResource(Res.string.example),
                 url = stringResource(Res.string.example),
+            )
+
+            TextButtonCustom(
+                modifier = Modifier,
+                text = stringResource(Res.string.example),
+                textStyle = AppTheme.typography.bodyNormal
             )
         }
     }
