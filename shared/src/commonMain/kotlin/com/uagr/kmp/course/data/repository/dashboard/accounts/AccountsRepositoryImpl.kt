@@ -22,12 +22,9 @@ class AccountsRepositoryImpl(
     override fun accounts(
         request: AccountsRequest
     ): Flow<NetworkResult<AccountsModel>> = flow {
-        val result = dataSource.accounts(request)
-        val domainResult = when (result) {
-            is NetworkResult.Success -> NetworkResult.Success(result.response.toDomain())
-            is NetworkResult.Error -> result
-        }
-        emit(value = domainResult)
+        emit(
+            value = dataSource.accounts(request)
+        )
     }.flowOn(context = dispatcher)
 
 }

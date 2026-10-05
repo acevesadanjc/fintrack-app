@@ -6,6 +6,8 @@ package com.uagr.kmp.course.data.network.datasource.dashboard
 
 import com.uagr.kmp.course.data.network.model.request.dashboard.accounts.AccountsRequest
 import com.uagr.kmp.course.data.network.model.response.dashboard.accounts.AccountsResponse
+import com.uagr.kmp.course.domain.mapper.dashboard.accounts.toDomain
+import com.uagr.kmp.course.domain.model.dashboard.accounts.AccountsModel
 import com.uagr.kmp.course.utils.constant.NetworkUrl
 import com.uagr.kmp.course.utils.network.NetworkResult
 import com.uagr.kmp.course.utils.network.safeApiCall
@@ -24,13 +26,16 @@ class AccountsRemoteDataSourceImpl(
 
     override suspend fun accounts(
         request: AccountsRequest,
-    ): NetworkResult<AccountsResponse> =
+    ): NetworkResult<AccountsModel> =
         safeApiCall(
             apiCall = {
                 httpClient.post(urlString = NetworkUrl.ACCOUNTS_ENDPOINT) {
                     contentType(type = ContentType.Application.Json)
                     setBody(body = request)
                 }
-            }
+            },
+            transform = { data: AccountsResponse ->
+                data.toDomain()
+            },
         )
 }

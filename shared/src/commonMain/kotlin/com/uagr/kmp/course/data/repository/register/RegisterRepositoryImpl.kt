@@ -7,7 +7,6 @@ package com.uagr.kmp.course.data.repository.register
 
 import com.uagr.kmp.course.data.network.datasource.register.RegisterRemoteDataSource
 import com.uagr.kmp.course.data.network.model.request.register.RegisterRequest
-import com.uagr.kmp.course.domain.mapper.register.toDomain
 import com.uagr.kmp.course.domain.model.register.RegisterModel
 import com.uagr.kmp.course.domain.repository.register.RegisterRepository
 import com.uagr.kmp.course.utils.network.NetworkResult
@@ -42,14 +41,8 @@ class RegisterRepositoryImpl(
     override fun registerUser(
         request: RegisterRequest,
     ): Flow<NetworkResult<RegisterModel>> = flow {
-        // Obtener Response desde el DataSource
-        val result = dataSource.registerUser(request)
-
-        // Transforma el response al DTO Modelo de Dominio
-        val domainResult = when (result) {
-            is NetworkResult.Success -> NetworkResult.Success(result.response.toDomain())
-            is NetworkResult.Error -> result
-        }
-        emit(value = domainResult)
+        emit(
+            dataSource.registerUser( request = request)
+        )
     }.flowOn(context = dispatcher)
 }

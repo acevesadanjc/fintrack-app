@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.uagr.kmp.course.domain.model.base.ErrorDialogModel
 import com.uagr.kmp.course.domain.usecase.dashboard.accounts.AccountsUseCase
+import com.uagr.kmp.course.domain.usecase.dashboard.me.MeUseCase
 import com.uagr.kmp.course.utils.constant.Constants
 import com.uagr.kmp.course.utils.network.NetworkResult
 import com.uagr.kmp.course.utils.operators.StatusLoading
@@ -29,7 +30,8 @@ import org.koin.core.annotation.KoinViewModel
 
 @KoinViewModel
 class DashboardViewModel(
-    private val useCase: AccountsUseCase,
+    private val useCaseAccounts: AccountsUseCase,
+    private val useCaseMe: MeUseCase,
 ): ViewModel() {
 
     private var _uiState = MutableStateFlow(DashboardUiState())
@@ -51,7 +53,7 @@ class DashboardViewModel(
     }
 
     fun getMe() = viewModelScope.launch {
-        useCase.accounts(
+        useCaseMe.getMe(
             color = "#2563EB",
             currency = "MXN",
             icon = "wallet",
@@ -102,7 +104,7 @@ class DashboardViewModel(
     }
 
     fun accounts() = viewModelScope.launch {
-        useCase.accounts(
+        useCaseAccounts.accounts(
             color = "#2563EB",
             currency = "MXN",
             icon = "wallet",

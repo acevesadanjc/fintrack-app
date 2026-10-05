@@ -11,7 +11,7 @@ object Constants {
     const val SOCKET_TIMEOUT_MILLIS  = 10000L
 
     // DataBase
-    const val DATABASE_NAME = "kmp_course_DB"
+    const val DATABASE_NAME = "fintrack_database.db"
 
     // DataStore
     const val USER_TOKEN = "user_token"

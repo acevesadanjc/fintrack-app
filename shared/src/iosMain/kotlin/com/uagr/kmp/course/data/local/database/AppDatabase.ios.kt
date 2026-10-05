@@ -14,11 +14,11 @@ import platform.Foundation.NSUserDomainMask
 
 actual fun getDatabaseBuilder(): RoomDatabase.Builder<AppDatabase> =
     Room.databaseBuilder<AppDatabase>(
-        name = applicationSupportDirectory() + "/${Constants.DATABASE_NAME}"
-    ).setDriver(androidx.sqlite.driver.bundled.BundledSQLiteDriver())
+        name = documentDirectory() + "/${Constants.DATABASE_NAME}",
+    )
 
 @OptIn(ExperimentalForeignApi::class)
-private fun applicationSupportDirectory(): String {
+private fun documentDirectory(): String {
     val documentDirectory = NSFileManager.defaultManager.URLForDirectory(
         directory = NSApplicationSupportDirectory,
         inDomain = NSUserDomainMask,

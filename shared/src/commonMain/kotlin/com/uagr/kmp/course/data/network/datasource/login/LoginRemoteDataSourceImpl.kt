@@ -6,6 +6,8 @@ package com.uagr.kmp.course.data.network.datasource.login
 
 import com.uagr.kmp.course.data.network.model.request.login.LoginRequest
 import com.uagr.kmp.course.data.network.model.response.login.LoginResponse
+import com.uagr.kmp.course.domain.mapper.login.toDomain
+import com.uagr.kmp.course.domain.model.login.LoginModel
 import com.uagr.kmp.course.utils.constant.NetworkUrl
 import com.uagr.kmp.course.utils.network.NetworkResult
 import com.uagr.kmp.course.utils.network.safeApiCall
@@ -24,13 +26,16 @@ class LoginRemoteDataSourceImpl(
 
     override suspend fun login(
         request: LoginRequest,
-    ): NetworkResult<LoginResponse> =
+    ): NetworkResult<LoginModel> =
         safeApiCall(
             apiCall = {
                 httpClient.post(urlString = NetworkUrl.LOGIN_ENDPOINT) {
                     contentType(type = ContentType.Application.Json)
                     setBody(body = request)
                 }
-            }
+            },
+            transform = { data: LoginResponse ->
+                data.toDomain()
+            },
         )
 }

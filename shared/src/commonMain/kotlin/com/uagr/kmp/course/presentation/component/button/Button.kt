@@ -128,24 +128,33 @@ private fun ButtonCustomPreview() {
                 .padding(all = Dimens.padding16),
             verticalArrangement = Arrangement.spacedBy(Dimens.padding16),
         ) {
+
             ButtonCustom(
                 backgroundButton = AppTheme.colors.primary,
                 textColor = AppTheme.colors.backgrounds.white,
                 text = stringResource(Res.string.example),
             )
-            CircularIconButtonCustom(
-                backgroundButton = Color.Transparent,
-                borderColor = AppTheme.colors.primary,
-                iconColor = AppTheme.colors.primary,
-                icon = painterResource(Res.drawable.ic_example),
-            )
+        }
+    }
+}
 
-            IconButtonCustom(
-                modifier = Modifier.size(Dimens.height20),
-                tint = AppTheme.colors.backgrounds.black,
-                icon = painterResource(Res.drawable.ic_back_arrow),
-                onClick = {}
+@Preview(showBackground = true)
+@Composable
+private fun Button2CustomPreview() {
+    SafeScreenContainerTest {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(all = Dimens.padding16),
+            verticalArrangement = Arrangement.spacedBy(Dimens.padding16),
+        ) {
+
+            ButtonCustom(
+                backgroundButton = AppTheme.colors.primary,
+                textColor = AppTheme.colors.backgrounds.white,
+                text = stringResource(Res.string.example),
             )
         }
     }
 }
+

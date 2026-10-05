@@ -6,6 +6,8 @@ package com.uagr.kmp.course.data.network.datasource.register
 
 import com.uagr.kmp.course.data.network.model.request.register.RegisterRequest
 import com.uagr.kmp.course.data.network.model.response.register.RegisterResponse
+import com.uagr.kmp.course.domain.mapper.register.toDomain
+import com.uagr.kmp.course.domain.model.register.RegisterModel
 import com.uagr.kmp.course.utils.constant.NetworkUrl
 import com.uagr.kmp.course.utils.network.NetworkResult
 import com.uagr.kmp.course.utils.network.safeApiCall
@@ -35,13 +37,16 @@ class RegisterRemoteDataSourceImpl(
 
     override suspend fun registerUser(
         request: RegisterRequest,
-    ): NetworkResult<RegisterResponse> =
+    ): NetworkResult<RegisterModel> =
         safeApiCall(
             apiCall = {
                 httpClient.post(urlString = NetworkUrl.REGISTER_ENDPOINT) {
                     contentType(type = ContentType.Application.Json)
                     setBody(body = request)
                 }
-            }
+            },
+            transform = { data: RegisterResponse ->
+                data.toDomain()
+            },
         )
 }

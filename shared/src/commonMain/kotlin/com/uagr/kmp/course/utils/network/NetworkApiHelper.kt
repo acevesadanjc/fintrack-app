@@ -21,16 +21,17 @@ import kotlin.coroutines.cancellation.CancellationException
  * Desacoplar el Modelo de Dominio (Domain)
  *
  * */
-suspend inline fun <reified Response : BaseResponse> safeApiCall(
+suspend inline fun <reified Response : BaseResponse, Domain> safeApiCall(
     crossinline apiCall: suspend () -> HttpResponse,
-): NetworkResult<Response> =
+    crossinline transform: (Response) -> Domain
+): NetworkResult<Domain> =
     try {
         val response = apiCall()
 
         if (response.status.isSuccess()) {
             val body = response.body<Response>()
             if (body.isSuccessful) {
-                NetworkResult.Success(response = body)
+                NetworkResult.Success(response = transform(body))
             } else {
                 NetworkResult.Error(
                     message = body.message?.takeIf { message -> message.isNotBlank() } ?: "Error unknown",

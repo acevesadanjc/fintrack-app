@@ -17,17 +17,17 @@ fun RegisterResponse.toDomain() = RegisterModel(
         message = error?.message.orEmpty()
     ),
     tokens = Tokens(
-        accessToken = tokens?.accessToken.orEmpty(),
-        refreshToken = tokens?.refreshToken.orEmpty(),
-        tokenType = tokens?.tokenType.orEmpty(),
-        expiresIn = tokens?.expiresIn ?: 0
+        accessToken = tokens?.access_token.orEmpty(),
+        refreshToken = tokens?.refresh_token.orEmpty(),
+        tokenType = tokens?.token_type.orEmpty(),
+        expiresIn = tokens?.expires_in ?: 0
     ),
     user = User(
         currency = user?.currency.orEmpty(),
         email = user?.email.orEmpty(),
-        emailVerified = user?.emailVerified ?: false,
+        emailVerified = user?.email_verified ?: false,
         id = user?.id.orEmpty(),
-        isActive = user?.isActive ?: false,
+        isActive = user?.is_active ?: false,
         locale = user?.locale.orEmpty(),
         name = user?.name.orEmpty()
     )

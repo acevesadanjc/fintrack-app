@@ -5,12 +5,12 @@
 package com.uagr.kmp.course.data.network.datasource.register
 
 import com.uagr.kmp.course.data.network.model.request.register.RegisterRequest
-import com.uagr.kmp.course.data.network.model.response.register.RegisterResponse
+import com.uagr.kmp.course.domain.model.register.RegisterModel
 import com.uagr.kmp.course.utils.network.NetworkResult
 
 interface RegisterRemoteDataSource {
 
     suspend fun registerUser(
         request: RegisterRequest,
-    ): NetworkResult<RegisterResponse>
+    ): NetworkResult<RegisterModel>
 }

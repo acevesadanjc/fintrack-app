@@ -30,7 +30,7 @@ fun DashboardScreen(
         val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
         LaunchedEffect(viewModel) {
-            viewModel.getMe()
+            //viewModel.getMe()
         }
 
         LaunchedEffect(viewModel.uiEffect) {

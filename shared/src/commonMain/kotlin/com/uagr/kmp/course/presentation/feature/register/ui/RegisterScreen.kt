@@ -19,6 +19,7 @@ import com.uagr.kmp.course.presentation.feature.register.viewmodel.RegisterUiEff
 import com.uagr.kmp.course.presentation.feature.register.viewmodel.RegisterUiEvent
 import com.uagr.kmp.course.presentation.feature.register.viewmodel.RegisterUiState
 import com.uagr.kmp.course.presentation.feature.register.viewmodel.RegisterViewModel
+import com.uagr.kmp.course.utils.flow.CollectWithLifecycle
 import com.uagr.kmp.course.utils.operators.StatusLoading
 import org.koin.compose.viewmodel.koinViewModel
 
@@ -31,6 +32,11 @@ fun RegisterScreen(
     SafeScreenContainer {
         val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
+/*
+        viewModel.uiState.CollectWithLifecycle() {
+
+        }
+*/
         // Manejo de Effects
         LaunchedEffect(viewModel.uiEffect) {
             viewModel.uiEffect.collect { effect ->

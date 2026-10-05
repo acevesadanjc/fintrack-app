@@ -2,6 +2,8 @@ package com.uagr.kmp.course.di
 
 import com.uagr.kmp.course.core.logger.AppLogger
 import com.uagr.kmp.course.core.logger.NapierLogger
+import com.uagr.kmp.course.data.local.database.AppDatabase
+import com.uagr.kmp.course.data.local.database.createDatabase
 import com.uagr.kmp.course.data.local.database.getDatabaseBuilder
 import com.uagr.kmp.course.data.local.datastore.AppDataStore
 import com.uagr.kmp.course.data.local.datastore.createDataStore
@@ -26,9 +28,12 @@ class AppModule {
     fun httpClient(appDataStore: AppDataStore) = createHttpClient(appDataStore = appDataStore)
 
     @Single
-    fun appDatabase() = getDatabaseBuilder()
-        .setQueryCoroutineContext(Dispatchers.IO)
-        .build()
+    fun appDatabase(
+        dispatcher: CoroutineDispatcher
+    ): AppDatabase = createDatabase(
+        builder = getDatabaseBuilder(),
+        dispatcher = dispatcher
+    )
 
     @Single
     fun dataStore() = createDataStore()

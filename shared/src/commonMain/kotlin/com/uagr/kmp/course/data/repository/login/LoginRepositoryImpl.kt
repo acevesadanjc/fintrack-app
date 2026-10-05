@@ -27,13 +27,8 @@ class LoginRepositoryImpl(
     override fun login(
         request: LoginRequest,
     ): Flow<NetworkResult<LoginModel>> = flow {
-        val result = dataSource.login(request)
-
-        // Transforma el response al DTO Modelo de Dominio
-        val domainResult = when (result) {
-            is NetworkResult.Success -> NetworkResult.Success(result.response.toDomain())
-            is NetworkResult.Error -> result
-        }
-        emit(value = domainResult)
+        emit(
+            dataSource.login( request = request)
+        )
     }.flowOn(context = dispatcher)
 }

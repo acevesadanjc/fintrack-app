@@ -9,8 +9,8 @@ import com.uagr.kmp.course.domain.model.login.LoginModel
 
 
 fun LoginResponse.toDomain() = LoginModel(
-    accessToken = accessToken.orEmpty(),
-    expiresIn = expiresIn ?: 0,
-    refreshToken = refreshToken.orEmpty(),
-    tokenType = tokenType.orEmpty()
+    accessToken = access_token.orEmpty(),
+    expiresIn = expires_in ?: 0,
+    refreshToken = refresh_token.orEmpty(),
+    tokenType = token_type.orEmpty()
 )

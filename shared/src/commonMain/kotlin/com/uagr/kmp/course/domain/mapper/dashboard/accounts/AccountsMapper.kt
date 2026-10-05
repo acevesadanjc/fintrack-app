@@ -10,15 +10,15 @@ import com.uagr.kmp.course.domain.model.dashboard.accounts.AccountsModel
 
 fun AccountsResponse.toDomain() = AccountsModel(
     color = color.orEmpty(),
-    createdAt = createdAt.orEmpty(),
+    createdAt = created_at.orEmpty(),
     currency = currency.orEmpty(),
-    currentBalance = currentBalance.orEmpty(),
+    currentBalance = current_balance.orEmpty(),
     icon = icon.orEmpty(),
     id = id.orEmpty(),
-    initialBalance = initialBalance.orEmpty(),
-    isActive = isActive ?: false,
+    initialBalance = initial_balance.orEmpty(),
+    isActive = is_active ?: false,
     name = name.orEmpty(),
     type = type.orEmpty(),
-    updatedAt = updatedAt.orEmpty(),
+    updatedAt = updated_at.orEmpty(),
     version = version ?: 0
 )

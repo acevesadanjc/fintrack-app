@@ -5,29 +5,18 @@
 package com.uagr.kmp.course.data.network.model.response.register
 
 
-import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
 data class User(
-    @SerialName("created_at")
-    val createdAt: String?,
-    @SerialName("currency")
+    val created_at: String?,
     val currency: String?,
-    @SerialName("email")
     val email: String?,
-    @SerialName("email_verified")
-    val emailVerified: Boolean?,
-    @SerialName("id")
+    val email_verified: Boolean?,
     val id: String?,
-    @SerialName("is_active")
-    val isActive: Boolean?,
-    @SerialName("locale")
+    val is_active: Boolean?,
     val locale: String?,
-    @SerialName("name")
     val name: String?,
-    @SerialName("timezone")
     val timezone: String?,
-    @SerialName("updated_at")
-    val updatedAt: String?
+    val updated_at: String?
 )
