@@ -2,22 +2,20 @@
  * HomeNavigation.kt
  * Copyright (c) 2026. All rights reserved
  */
-package com.uagr.kmp.course.presentation.feature.home.navigation
+package com.uagr.kmp.course.presentation.feature.dashboard.navigation
 
 import androidx.compose.runtime.Composable
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import com.uagr.kmp.course.presentation.feature.home.ui.HomeScreen
+import com.uagr.kmp.course.presentation.feature.dashboard.ui.DashboardScreen
 
 data object HomeNavigation : Screen {
     @Composable
     override fun Content() {
         val navigator = LocalNavigator.currentOrThrow
-        HomeScreen(
-            onNavigateToHome = {
-                //navigator.pop()
-            },
-        )
+        DashboardScreen {
+            //navigator.pop()
+        }
     }
 }

@@ -16,4 +16,8 @@ object Constants {
     // DataStore
     const val USER_TOKEN = "user_token"
     const val DATASTORE_NAME = "kmp_dataStore"
+
+    // Device id que se asocia con las accounts creadas
+    const val DEVICE_ID = "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+
 }

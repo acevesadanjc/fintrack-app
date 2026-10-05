@@ -22,7 +22,7 @@ import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabOptions
 import cafe.adriel.voyager.transitions.SlideTransition
-import com.uagr.kmp.course.presentation.feature.home.navigation.HomeNavigation
+import com.uagr.kmp.course.presentation.feature.dashboard.navigation.HomeNavigation
 import course.shared.generated.resources.Res
 import course.shared.generated.resources.main_tab_budget
 import course.shared.generated.resources.main_tab_goal

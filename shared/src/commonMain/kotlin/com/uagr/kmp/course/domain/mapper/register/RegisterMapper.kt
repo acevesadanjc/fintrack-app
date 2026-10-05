@@ -1,5 +1,5 @@
 /*
- * RegisterMapper.kt.kt
+ * RegisterMapper.kt
  * Copyright (c) 2026. All rights reserved
  */
 package com.uagr.kmp.course.domain.mapper.register
