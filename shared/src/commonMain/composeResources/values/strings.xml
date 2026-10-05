@@ -5,6 +5,11 @@
     <string name="email_example">user@gmail</string>
     <string name="password_example">Password123</string>
 
+    <!-- Tab -->
+    <string name="main_tab_home">Inicio</string>
+    <string name="main_tab_transactions">Movimientos</string>
+    <string name="main_tab_budget">Presupuesto</string>">
+    <string name="main_tab_goal">Metas</string>
 
     <!-- Error -->
     <string name="error">Error</string>
@@ -47,6 +52,19 @@
     <!-- Home -->
     <string name="home">Home</string>
     <string name="home_logout">Salir</string>
+
+    <!-- Navigation -->
+    <string name="navigation_home">Dashboard</string>
+    <string name="navigation_transactions">Transactions</string>
+    <string name="navigation_tools">Tools</string>
+    <string name="navigation_profile">Profile</string>
+    <string name="label_budgets">Budget</string>
+    <string name="title_savings_goals">Goals</string>
+    <string name="title_assets_management">Assets</string>
+    <string name="achievements_title">Achievements</string>
+    <string name="notes">Notes</string>
+    <string name="shopping_list">Shopping</string>
+    <string name="ai_advisor_title">AIAdvisor</string>
 
 
 </resources>

@@ -69,6 +69,10 @@ val backgroundBlueLight = Color(0xFF0066FF)
 val dividerLight = Color(0xFFEBEFF9)
 val backgroundProgressIndicatorLight = Color(0x80898989)
 
+// -- Navigation Bar --
+val indicatorLight = Color(0xFFE8F0FC)
+
+
 // --- Others --
 
 
@@ -133,6 +137,7 @@ val lightModeAppColors = AppColors(
         white = backgroundWhiteLight,
         yellow = backgroundYellowLight,
         blue = backgroundBlueLight,
+        indicator = indicatorLight
     ),
     divider = dividerLight,
     backgroundProgressIndicator = backgroundProgressIndicatorLight,

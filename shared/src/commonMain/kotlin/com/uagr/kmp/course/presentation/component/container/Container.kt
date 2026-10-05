@@ -25,6 +25,7 @@ fun SafeScreenContainer(
     backgroundColor: Color = AppTheme.colors.background,
     isSystemIconsDark: Boolean? = null,
     contentAlignment: Alignment = Alignment.Center,
+    isPaddingNeeded: Boolean = true,
     content: @Composable BoxScope.() -> Unit,
 ) {
     isSystemIconsDark?.let {
@@ -34,15 +35,26 @@ fun SafeScreenContainer(
         modifier = Modifier.fillMaxSize(),
         color = systemColor,
     ) {
-        Box(
-            modifier = modifier
-                .fillMaxSize()
-                .statusBarsPadding()
-                .navigationBarsPadding()
-                .background(color = backgroundColor),
-            contentAlignment = contentAlignment,
-        ) {
-            content()
+        if (isPaddingNeeded) {
+            Box(
+                modifier = modifier
+                    .fillMaxSize()
+                    .statusBarsPadding()
+                    .navigationBarsPadding()
+                    .background(color = backgroundColor),
+                contentAlignment = contentAlignment
+            ) {
+                content()
+            }
+        } else {
+            Box(
+                modifier = modifier
+                    .fillMaxSize()
+                    .background(color = AppTheme.colors.background),
+                contentAlignment = contentAlignment
+            ) {
+                content()
+            }
         }
     }
 }
@@ -52,6 +64,7 @@ fun SafeScreenContainerTest(
     modifier: Modifier = Modifier,
     systemColor: Color = AppTheme.colors.primary,
     backgroundColor: Color = AppTheme.colors.background,
+    isPaddingNeeded: Boolean = true,
     content: @Composable BoxScope.() -> Unit,
 ) {
     AppTheme {
@@ -59,14 +72,22 @@ fun SafeScreenContainerTest(
             modifier = Modifier.fillMaxSize(),
             color = systemColor,
         ) {
-            Box(
-                modifier = modifier
-                    .fillMaxSize()
-                    .statusBarsPadding()
-                    .navigationBarsPadding()
-                    .background(color = backgroundColor),
-            ) {
-                content()
+            if (isPaddingNeeded) {
+                Box(
+                    modifier = modifier.fillMaxSize()
+                        .statusBarsPadding()
+                        .navigationBarsPadding()
+                        .background(color = backgroundColor)
+                ) {
+                    content()
+                }
+            } else {
+                Box(
+                    modifier = modifier.fillMaxSize()
+                        .background(color = backgroundColor)
+                ) {
+                    content()
+                }
             }
         }
     }

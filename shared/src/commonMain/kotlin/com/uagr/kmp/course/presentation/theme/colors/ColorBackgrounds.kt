@@ -13,4 +13,5 @@ data class ColorBackgrounds(
     val white: Color = Color.Unspecified,
     val yellow: Color = Color.Unspecified,
     val blue: Color = Color.Unspecified,
+    val indicator: Color = Color.Unspecified
 )

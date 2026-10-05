@@ -19,8 +19,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
-import com.uagr.kmp.course.presentation.component.buton.ButtonCustom
-import com.uagr.kmp.course.presentation.component.buton.CircularIconButtonCustom
+import com.uagr.kmp.course.presentation.component.button.ButtonCustom
+import com.uagr.kmp.course.presentation.component.button.CircularIconButtonCustom
 import com.uagr.kmp.course.presentation.component.container.SafeScreenContainerTest
 import com.uagr.kmp.course.presentation.component.text.TextCustom
 import com.uagr.kmp.course.presentation.theme.AppTheme

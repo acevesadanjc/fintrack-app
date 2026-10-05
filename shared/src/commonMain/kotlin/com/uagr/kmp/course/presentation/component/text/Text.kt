@@ -51,7 +51,7 @@ import org.jetbrains.compose.resources.stringResource
 fun TextCustom(
     modifier: Modifier = Modifier,
     style: TextStyle = AppTheme.typography.bodyNormal,
-    color: Color,
+    color: Color?,
     text: String,
     textAlign: TextAlign = TextAlign.Center,
 ) {
@@ -60,7 +60,7 @@ fun TextCustom(
         text = text,
         textAlign = textAlign,
         style = style,
-        color = color,
+        color = color.takeIf { it != null } ?: style.color,
     )
 }
 

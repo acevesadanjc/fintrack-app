@@ -11,6 +11,8 @@ import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.TextUnit
+import androidx.compose.ui.unit.sp
 import course.shared.generated.resources.Res
 import course.shared.generated.resources.open_sans
 import org.jetbrains.compose.resources.Font
@@ -88,24 +90,47 @@ val MaterialThemAppTypography
 
 @Immutable
 data class AppTypography(
+    // 4
+    val bodyMicroExtra: TextStyle,
+    val bodyMicroExtraSemiBold: TextStyle,
+    val bodyMicroExtraBold: TextStyle,
+    // 6
+    val bodyMicro: TextStyle,
+    val bodyMicroSemiBold: TextStyle,
+    val bodyMicroBold: TextStyle,
+    // 8
+    val bodyTinyExtra: TextStyle,
+    val bodyTinyExtraSemiBold: TextStyle,
+    val bodyTinyExtraBold: TextStyle,
+    // 10
+    val bodyTiny: TextStyle,
+    val bodyTinySemiBold: TextStyle,
+    val bodyTinyBold: TextStyle,
+    // 12
     val bodySmallExtra: TextStyle,
     val bodySmallExtraSemiBold: TextStyle,
     val bodySmallExtraBold: TextStyle,
+    // 14
     val bodySmall: TextStyle,
     val bodySmallSemiBold: TextStyle,
     val bodySmallBold: TextStyle,
+    // 16
     val bodyNormal: TextStyle,
     val bodyNormalSemiBold: TextStyle,
     val bodyNormalBold: TextStyle,
+    // 20
     val bodyMedium: TextStyle,
     val bodyMediumSemiBold: TextStyle,
     val bodyMediumBold: TextStyle,
+    // 24
     val bodyBig: TextStyle,
     val bodyBigSemiBold: TextStyle,
     val bodyBigBold: TextStyle,
+    // 32
     val bodyBigExtra: TextStyle,
     val bodyBigExtraSemiBold: TextStyle,
     val bodyBigExtraBold: TextStyle,
+    // 40
     val bodyLarge: TextStyle,
     val bodyLargeSemiBold: TextStyle,
     val bodyLargeBold: TextStyle,
@@ -113,6 +138,22 @@ data class AppTypography(
 
 val appTypography
     @Composable get() = AppTypography(
+        bodyMicroExtra = TextStyle(fontFamily = fontFamily, fontSize = Dimens.textSizeExtraMicro, fontWeight = FontWeight.Normal),
+        bodyMicroExtraSemiBold = TextStyle(fontFamily = fontFamily, fontSize = Dimens.textSizeExtraMicro, fontWeight = FontWeight.SemiBold),
+        bodyMicroExtraBold = TextStyle(fontFamily = fontFamily, fontSize = Dimens.textSizeExtraMicro, fontWeight = FontWeight.Bold),
+
+        bodyMicro = TextStyle(fontFamily = fontFamily, fontSize = Dimens.textSizeMicro, fontWeight = FontWeight.Normal),
+        bodyMicroSemiBold = TextStyle(fontFamily = fontFamily, fontSize = Dimens.textSizeMicro, fontWeight = FontWeight.SemiBold),
+        bodyMicroBold = TextStyle(fontFamily = fontFamily, fontSize = Dimens.textSizeMicro, fontWeight = FontWeight.Bold),
+
+        bodyTinyExtra = TextStyle(fontFamily = fontFamily, fontSize = Dimens.textSizeExtraTiny, fontWeight = FontWeight.Normal),
+        bodyTinyExtraSemiBold = TextStyle(fontFamily = fontFamily, fontSize = Dimens.textSizeExtraTiny, fontWeight = FontWeight.SemiBold),
+        bodyTinyExtraBold = TextStyle(fontFamily = fontFamily, fontSize = Dimens.textSizeExtraTiny, fontWeight = FontWeight.Bold),
+
+        bodyTiny = TextStyle(fontFamily = fontFamily, fontSize = Dimens.textSizeTiny, fontWeight = FontWeight.Normal),
+        bodyTinySemiBold = TextStyle(fontFamily = fontFamily, fontSize = Dimens.textSizeTiny, fontWeight = FontWeight.SemiBold),
+        bodyTinyBold = TextStyle(fontFamily = fontFamily, fontSize = Dimens.textSizeTiny, fontWeight = FontWeight.Bold),
+
         bodySmallExtra = TextStyle(fontFamily = fontFamily, fontSize = Dimens.textSizeExtraSmall, fontWeight = FontWeight.Normal),
         bodySmallExtraSemiBold = TextStyle(fontFamily = fontFamily, fontSize = Dimens.textSizeExtraSmall, fontWeight = FontWeight.SemiBold),
         bodySmallExtraBold = TextStyle(fontFamily = fontFamily, fontSize = Dimens.textSizeExtraSmall, fontWeight = FontWeight.Bold),

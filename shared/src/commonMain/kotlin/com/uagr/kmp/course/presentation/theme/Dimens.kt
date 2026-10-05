@@ -12,6 +12,10 @@ import androidx.compose.ui.unit.sp
 object Dimens {
 
     // ------ Text size ------
+    val textSizeExtraMicro: TextUnit = 4.sp
+    val textSizeMicro: TextUnit = 6.sp
+    val textSizeExtraTiny: TextUnit = 8.sp
+    val textSizeTiny: TextUnit = 10.sp
     val textSizeExtraSmall: TextUnit = 12.sp
     val textSizeSmall: TextUnit = 14.sp
     val textSizeNormal: TextUnit = 16.sp
