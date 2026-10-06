@@ -11,8 +11,6 @@ import androidx.sqlite.driver.bundled.BundledSQLiteDriver
 import com.uagr.kmp.course.data.local.database.dao.user.UserDao
 import com.uagr.kmp.course.data.local.model.user.UserEntity
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.IO
 
 @Database(
     entities = [

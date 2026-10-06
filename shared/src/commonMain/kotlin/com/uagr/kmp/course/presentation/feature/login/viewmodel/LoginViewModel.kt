@@ -7,7 +7,8 @@ package com.uagr.kmp.course.presentation.feature.login.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.uagr.kmp.course.domain.model.base.ErrorDialogModel
-import com.uagr.kmp.course.domain.usecase.login.LoginUseCase
+import com.uagr.kmp.course.domain.usecase.login.LoginLocalUseCase
+import com.uagr.kmp.course.domain.usecase.login.LoginRemoteUseCase
 import com.uagr.kmp.course.domain.usecase.login.LoginValidationUseCase
 import com.uagr.kmp.course.utils.network.NetworkResult
 import com.uagr.kmp.course.utils.operators.StatusLoading
@@ -29,8 +30,9 @@ import org.koin.core.annotation.KoinViewModel
 
 @KoinViewModel
 class LoginViewModel(
-    private val useCase: LoginUseCase,
+    private val useCaseRemote: LoginRemoteUseCase,
     private val validationsUseCase: LoginValidationUseCase,
+    private val useCaseLocal: LoginLocalUseCase,
 ): ViewModel() {
 
     private var _uiState = MutableStateFlow(LoginUiState())
@@ -98,7 +100,7 @@ class LoginViewModel(
     }
 
     private fun login() = viewModelScope.launch {
-        useCase.login(
+        useCaseRemote.login(
             email = uiState.value.email,
             password = uiState.value.password
         ).onStart {
@@ -113,8 +115,7 @@ class LoginViewModel(
         }.collect { result ->
             when(result) {
                 is NetworkResult.Success -> {
-                    _uiState.update { state -> state.copy(isLoading = StatusLoading.DISMISS_LOADING) }
-                    sendEffect(LoginUiEffect.OnLoginSuccess)
+                    saveAccessToken(accessToken = result.response.accessToken)
                 }
                 is NetworkResult.Error -> {
                     _uiState.update { state ->
@@ -125,6 +126,20 @@ class LoginViewModel(
                     }
                 }
             }
+        }
+    }
+
+    private fun saveAccessToken(accessToken: String) = viewModelScope.launch {
+        useCaseLocal.saveAccessToken(accessToken = accessToken).catch {
+            _uiState.update { state ->
+                state.copy(
+                    isLoading = StatusLoading.DISMISS_LOADING,
+                    errorDialog = showErrorDialog(),
+                )
+            }
+        }.collect {
+            _uiState.update { state -> state.copy(isLoading = StatusLoading.DISMISS_LOADING) }
+            sendEffect(LoginUiEffect.OnLoginSuccess)
         }
     }
 

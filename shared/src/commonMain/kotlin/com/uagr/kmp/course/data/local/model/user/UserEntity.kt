@@ -13,7 +13,7 @@ import androidx.room3.PrimaryKey
  */
 @Entity(tableName = "users")
 data class UserEntity(
-    @PrimaryKey(autoGenerate = true) val id: Long = 0,
+    @PrimaryKey(autoGenerate = true) val id: Int = 0,
     val uuid: String?,
     val email: String?,
     val fullName: String?,

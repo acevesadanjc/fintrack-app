@@ -9,6 +9,8 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.uagr.kmp.course.core.logger.NapierLogger
+import com.uagr.kmp.course.data.local.datastore.AppDataStore
 import com.uagr.kmp.course.presentation.component.container.SafeScreenContainer
 import com.uagr.kmp.course.presentation.component.container.SafeScreenContainerTest
 import com.uagr.kmp.course.presentation.component.dialog.DialogCustom
@@ -18,6 +20,7 @@ import com.uagr.kmp.course.presentation.feature.dashboard.viewmodel.DashboardUiS
 import com.uagr.kmp.course.presentation.feature.dashboard.viewmodel.DashboardViewModel
 import com.uagr.kmp.course.presentation.feature.dashboard.viewmodel.TransactionItem
 import com.uagr.kmp.course.presentation.theme.AppTheme
+import kotlinx.coroutines.flow.first
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
@@ -30,7 +33,7 @@ fun DashboardScreen(
         val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
         LaunchedEffect(viewModel) {
-            //viewModel.getMe()
+            viewModel.getMe()
         }
 
         LaunchedEffect(viewModel.uiEffect) {

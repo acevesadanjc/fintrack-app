@@ -6,6 +6,9 @@ package com.uagr.kmp.course.presentation.feature.dashboard.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.uagr.kmp.course.core.logger.AppLogger
+import com.uagr.kmp.course.core.logger.NapierLogger
+import com.uagr.kmp.course.data.local.datastore.AppDataStore
 import com.uagr.kmp.course.domain.model.base.ErrorDialogModel
 import com.uagr.kmp.course.domain.usecase.dashboard.accounts.AccountsUseCase
 import com.uagr.kmp.course.domain.usecase.dashboard.me.MeUseCase
@@ -21,6 +24,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
@@ -30,6 +34,8 @@ import org.koin.core.annotation.KoinViewModel
 
 @KoinViewModel
 class DashboardViewModel(
+    private val appDataStore: AppDataStore,
+    private val napierLogger: NapierLogger,
     private val useCaseAccounts: AccountsUseCase,
     private val useCaseMe: MeUseCase,
 ): ViewModel() {
@@ -53,6 +59,8 @@ class DashboardViewModel(
     }
 
     fun getMe() = viewModelScope.launch {
+        napierLogger.info(tag = "DashboardScreen", message = "Access Token: ${appDataStore.userToken.first()}")
+
         useCaseMe.getMe(
             color = "#2563EB",
             currency = "MXN",

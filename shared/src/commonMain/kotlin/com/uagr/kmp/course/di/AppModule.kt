@@ -36,6 +36,9 @@ class AppModule {
     )
 
     @Single
+    fun userDao(database: AppDatabase) = database.userDao()
+
+    @Single
     fun dataStore() = createDataStore()
 
     @Single

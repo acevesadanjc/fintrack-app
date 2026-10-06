@@ -6,11 +6,17 @@ package com.uagr.kmp.course.domain.repository.login
 
 import com.uagr.kmp.course.data.network.model.request.login.LoginRequest
 import com.uagr.kmp.course.domain.model.login.LoginModel
+import com.uagr.kmp.course.domain.model.user.UserModel
 import com.uagr.kmp.course.utils.network.NetworkResult
 import kotlinx.coroutines.flow.Flow
 
 interface LoginRepository {
+
     fun login(
-        request: LoginRequest,
+        request: LoginRequest
     ): Flow<NetworkResult<LoginModel>>
+
+    fun deleteAndInsertUser(user: UserModel): Flow<Unit>
+
+    fun saveAccessToken(accessToken: String): Flow<Unit>
 }
