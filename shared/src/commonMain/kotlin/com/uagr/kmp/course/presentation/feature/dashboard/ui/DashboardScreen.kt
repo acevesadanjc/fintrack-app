@@ -14,12 +14,14 @@ import com.uagr.kmp.course.data.local.datastore.AppDataStore
 import com.uagr.kmp.course.presentation.component.container.SafeScreenContainer
 import com.uagr.kmp.course.presentation.component.container.SafeScreenContainerTest
 import com.uagr.kmp.course.presentation.component.dialog.DialogCustom
+import com.uagr.kmp.course.presentation.component.loader.Loader
 import com.uagr.kmp.course.presentation.feature.dashboard.viewmodel.DashboardUiEffect
 import com.uagr.kmp.course.presentation.feature.dashboard.viewmodel.DashboardUiIntent
 import com.uagr.kmp.course.presentation.feature.dashboard.viewmodel.DashboardUiState
 import com.uagr.kmp.course.presentation.feature.dashboard.viewmodel.DashboardViewModel
 import com.uagr.kmp.course.presentation.feature.dashboard.viewmodel.TransactionItem
 import com.uagr.kmp.course.presentation.theme.AppTheme
+import com.uagr.kmp.course.utils.operators.StatusLoading
 import kotlinx.coroutines.flow.first
 import org.koin.compose.viewmodel.koinViewModel
 
@@ -33,19 +35,18 @@ fun DashboardScreen(
         val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
         LaunchedEffect(viewModel) {
-            viewModel.getMe()
+            viewModel.onIntent(DashboardUiIntent.LoadData)
         }
 
         LaunchedEffect(viewModel.uiEffect) {
             viewModel.uiEffect.collect { effect ->
                 when (effect) {
-                    is DashboardUiEffect.OnAssociatedAccount -> onNavigateToHome()
+                    is DashboardUiEffect.OnAssociatedAccount -> {}
                 }
             }
         }
 
         val mockState = DashboardUiState(
-            userName = "Diego",
             totalBalance = "$24,860.00",
             totalIncome = "+$18,500",
             totalExpense = "-$8,460",
@@ -75,12 +76,7 @@ fun DashboardScreen(
             }
         )
 
-        /*
-        if (uiState.isLoading == StatusLoading.SHOW_LOADING) {
-            Loader()
-        }
-        */
-
+        Loader(isLoading = uiState.isLoading)
 
         // Si es null se hace dismiss
         DialogCustom(

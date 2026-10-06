@@ -4,9 +4,11 @@
  */
 package com.uagr.kmp.course.domain.usecase.login
 
+import org.jetbrains.compose.resources.StringResource
+
 
 data class LoginValidationResult(
-    val passwordError: String? = null
+    val passwordError: StringResource? = null
 ) {
 
     val isValid: Boolean

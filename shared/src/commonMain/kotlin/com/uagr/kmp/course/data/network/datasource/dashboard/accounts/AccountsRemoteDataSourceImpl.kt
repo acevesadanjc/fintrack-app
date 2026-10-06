@@ -1,8 +1,4 @@
-/*
- * AccountsRemoteDataSourceImpl.kt
- * Copyright (c) 2026. All rights reserved
- */
-package com.uagr.kmp.course.data.network.datasource.dashboard
+package com.uagr.kmp.course.data.network.datasource.dashboard.accounts
 
 import com.uagr.kmp.course.data.network.model.request.dashboard.accounts.AccountsRequest
 import com.uagr.kmp.course.data.network.model.response.dashboard.accounts.AccountsResponse
@@ -17,7 +13,6 @@ import io.ktor.client.request.setBody
 import io.ktor.http.ContentType
 import io.ktor.http.contentType
 import org.koin.core.annotation.Factory
-
 
 @Factory
 class AccountsRemoteDataSourceImpl(

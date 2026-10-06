@@ -16,16 +16,16 @@ sealed interface DashboardUiIntent {
 }
 
 data class DashboardUiState(
-    val userName: String = "Diego",
-    val totalBalance: String = "$24,860.00",
-    val totalIncome: String = "+$18,500",
-    val totalExpense: String = "-$8,460",
-    val monthlyExpense: String = "$8,460",
-    val monthlyExpensePercentage: String = "12%",
-    val isExpenseDecreasing: Boolean = true,
-    val monthlySavings: String = "$3,120",
-    val monthlySavingsPercentage: String = "8%",
-    val isSavingsIncreasing: Boolean = true,
+    val userName: String = "",
+    val totalBalance: String = "",
+    val totalIncome: String = "",
+    val totalExpense: String = "",
+    val monthlyExpense: String = "",
+    val monthlyExpensePercentage: String = "",
+    val isExpenseDecreasing: Boolean = false,
+    val monthlySavings: String = "",
+    val monthlySavingsPercentage: String = "",
+    val isSavingsIncreasing: Boolean = false,
     val recentTransactions: List<TransactionItem> = emptyList(),
     val isLoading: StatusLoading = StatusLoading.DISMISS_LOADING,
     val errorDialog: ErrorDialogModel? = null

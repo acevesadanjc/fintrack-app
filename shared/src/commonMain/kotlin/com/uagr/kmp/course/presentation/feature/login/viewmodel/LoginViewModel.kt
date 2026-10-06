@@ -86,10 +86,11 @@ class LoginViewModel(
                 password = uiState.value.password
             )
             if (validateFields.hasError) {
+                val errorMessage = validateFields.message?.let { getString(it) }.orEmpty()
                 _uiState.update { state ->
                     state.copy(
                         errorDialog = showErrorDialog(
-                            validateFields.message.orEmpty()
+                            errorMessage
                         )
                     )
                 }

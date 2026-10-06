@@ -10,12 +10,11 @@ object NetworkUrl {
     const val BASE_URL = "https://fintrack-hitss.onrender.com"
 
     // Endpoint
-    //
+    // POST
     const val LOGIN_ENDPOINT = "/api/v1/auth/login"
-    //
+    // POST
     const val REGISTER_ENDPOINT = "/api/v1/auth/register"
-
-    // Obtener la información del usuario autenticado, incluyendo su perfil y detalles personales.
+    // GET Obtener la información del usuario autenticado, incluyendo su perfil y detalles personales.
     const val ME_ENDPOINT = "/api/v1/users/me"
 
     // Crear/enlazar cuenta bancaria a un usuario.

@@ -4,13 +4,15 @@
  */
 package com.uagr.kmp.course.domain.usecase.register
 
+import org.jetbrains.compose.resources.StringResource
+
 
 /**
  * Encapsula el resultado de las validaciones de negocio aplicadas al formulario de registro.
  */
 data class RegisterValidationResult(
-    val passwordError: String? = null,
-    val confirmPasswordError: String? = null,
+    val passwordError: StringResource? = null,
+    val confirmPasswordError: StringResource? = null,
 ) {
     /**
      * Indica si la totalidad del formulario es válido para ser enviado.

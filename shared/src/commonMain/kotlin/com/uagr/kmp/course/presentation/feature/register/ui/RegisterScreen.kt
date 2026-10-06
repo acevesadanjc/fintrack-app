@@ -65,9 +65,7 @@ fun RegisterScreen(
             }
         )
 
-        if (uiState.isLoading == StatusLoading.SHOW_LOADING) {
-            Loader(isLoading = uiState.isLoading)
-        }
+        Loader(isLoading = uiState.isLoading)
 
         // Si es null se hace dismiss
         DialogCustom(

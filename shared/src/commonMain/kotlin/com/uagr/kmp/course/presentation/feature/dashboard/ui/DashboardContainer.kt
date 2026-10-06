@@ -30,6 +30,15 @@ import com.uagr.kmp.course.presentation.component.container.SafeScreenContainerT
 import com.uagr.kmp.course.presentation.component.item.TransactionRowItem
 import com.uagr.kmp.course.presentation.feature.dashboard.viewmodel.DashboardUiIntent
 import com.uagr.kmp.course.presentation.feature.dashboard.viewmodel.DashboardUiState
+import course.shared.generated.resources.Res
+import course.shared.generated.resources.home_Hello
+import course.shared.generated.resources.home_expenses
+import course.shared.generated.resources.home_financial_overview
+import course.shared.generated.resources.home_recent_transactions
+import course.shared.generated.resources.home_savings
+import course.shared.generated.resources.home_this_month
+import course.shared.generated.resources.home_view_all
+import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun DashboardContainer(
@@ -45,13 +54,13 @@ fun DashboardContainer(
         item {
             Spacer(modifier = Modifier.height(16.dp))
             Text(
-                text = "Hola, ${state.userName}",
+                text = stringResource(Res.string.home_Hello) + " ${state.userName}",
                 color = Color.Gray,
                 style = MaterialTheme.typography.bodyLarge
             )
             Spacer(modifier = Modifier.height(4.dp))
             Text(
-                text = "Tu panorama financiero",
+                text = stringResource(Res.string.home_financial_overview),
                 fontSize = 24.sp,
                 fontWeight = FontWeight.Bold,
                 color = Color.Black
@@ -72,7 +81,7 @@ fun DashboardContainer(
         // Sección Este Mes (Gastos y Ahorro)
         item {
             Text(
-                text = "Este mes",
+                text = stringResource(Res.string.home_this_month),
                 fontSize = 18.sp,
                 fontWeight = FontWeight.Bold,
                 color = Color.Black
@@ -83,14 +92,14 @@ fun DashboardContainer(
                 horizontalArrangement = Arrangement.spacedBy(12.dp)
             ) {
                 SummaryStatCard(
-                    title = "Gastos",
+                    title = stringResource(Res.string.home_expenses),
                     amount = state.monthlyExpense,
                     percentage = state.monthlyExpensePercentage,
                     isPositiveTrend = state.isExpenseDecreasing,
                     modifier = Modifier.weight(1f)
                 )
                 SummaryStatCard(
-                    title = "Ahorro",
+                    title = stringResource(Res.string.home_savings),
                     amount = state.monthlySavings,
                     percentage = state.monthlySavingsPercentage,
                     isPositiveTrend = state.isSavingsIncreasing,
@@ -108,13 +117,13 @@ fun DashboardContainer(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
-                    text = "Últimos movimientos",
+                    text = stringResource(Res.string.home_recent_transactions),
                     fontSize = 18.sp,
                     fontWeight = FontWeight.Bold,
                     color = Color.Black
                 )
                 Text(
-                    text = "Ver todos",
+                    text = stringResource(Res.string.home_view_all),
                     color = Color(0xFF2196F3),
                     fontWeight = FontWeight.SemiBold,
                     modifier = Modifier.clickable {

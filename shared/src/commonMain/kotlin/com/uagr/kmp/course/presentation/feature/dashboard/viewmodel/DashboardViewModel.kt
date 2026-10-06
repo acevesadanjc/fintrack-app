@@ -6,7 +6,6 @@ package com.uagr.kmp.course.presentation.feature.dashboard.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.uagr.kmp.course.core.logger.AppLogger
 import com.uagr.kmp.course.core.logger.NapierLogger
 import com.uagr.kmp.course.data.local.datastore.AppDataStore
 import com.uagr.kmp.course.domain.model.base.ErrorDialogModel
@@ -54,22 +53,25 @@ class DashboardViewModel(
 
     fun onIntent(intent: DashboardUiIntent) {
         when (intent) {
-            else -> {}
+            is DashboardUiIntent.LoadData -> {
+                getMe()
+            }
+            is DashboardUiIntent.OnTransactionClicked -> {
+                //sendEffect(DashboardUiEffect.OnNavigateToTransaction(intent.id))
+            }
+            is DashboardUiIntent.OnSeeAllTransactionsClicked -> {
+                //sendEffect(DashboardUiEffect.OnNavigateToTransactions)
+            }
+            is DashboardUiIntent.OnDismissErrorDialog -> {
+                dismissDialog()
+            }
         }
     }
 
     fun getMe() = viewModelScope.launch {
         napierLogger.info(tag = "DashboardScreen", message = "Access Token: ${appDataStore.userToken.first()}")
 
-        useCaseMe.getMe(
-            color = "#2563EB",
-            currency = "MXN",
-            icon = "wallet",
-            id = Constants.DEVICE_ID,
-            initialBalance = 1500,
-            name = "Cuenta principal",
-            type = "CASH"
-        ).onStart {
+        useCaseMe.getMe().onStart {
             _uiState.update { state -> state.copy(isLoading = StatusLoading.SHOW_LOADING) }
         }.catch {
             _uiState.update { state ->
@@ -97,7 +99,10 @@ class DashboardViewModel(
                             Redirigir al usuario a la pantalla principal de Dashboard
 
                      */
-                    sendEffect(DashboardUiEffect.OnAssociatedAccount)
+                    _uiState.update { state ->
+                        state.copy(userName = result.response.name)
+                    }
+                    accounts(result.response.id)
                 }
                 is NetworkResult.Error -> {
                     _uiState.update { state ->
@@ -111,15 +116,15 @@ class DashboardViewModel(
         }
     }
 
-    fun accounts() = viewModelScope.launch {
+    private fun accounts(userId: String) = viewModelScope.launch {
         useCaseAccounts.accounts(
-            color = "#2563EB",
-            currency = "MXN",
-            icon = "wallet",
-            id = Constants.DEVICE_ID,
-            initialBalance = 1500,
-            name = "Cuenta principal",
-            type = "CASH"
+            color = Constants.DEFAULT_COLOR,
+            currency = Constants.DEFAULT_CURRENCY,
+            icon = Constants.DEFAULT_ICON,
+            id = userId,
+            initialBalance = Constants.DEFAULT_INITIAL_BALANCE,
+            name = Constants.DEFAULT_MAIN_ACCOUNT,
+            type = Constants.DEFAULT_TYPE
         ).onStart {
             _uiState.update { state -> state.copy(isLoading = StatusLoading.SHOW_LOADING) }
         }.catch {
@@ -148,7 +153,7 @@ class DashboardViewModel(
                             Redirigir al usuario a la pantalla principal de Dashboard
 
                      */
-                    sendEffect(DashboardUiEffect.OnAssociatedAccount)
+                    //sendEffect(DashboardUiEffect.OnAssociatedAccount)
                 }
                 is NetworkResult.Error -> {
                     _uiState.update { state ->
@@ -176,9 +181,6 @@ class DashboardViewModel(
 
 
     /*
-
-
-
     private fun updateEmail(email: String) = viewModelScope.launch {
         _uiState.update { state -> state.copy(email = email) }
     }

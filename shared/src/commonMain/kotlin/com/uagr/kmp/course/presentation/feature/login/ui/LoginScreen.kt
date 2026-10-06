@@ -55,9 +55,7 @@ fun LoginScreen(
             }
         )
 
-        if (uiState.isLoading == StatusLoading.SHOW_LOADING) {
-            Loader(isLoading = uiState.isLoading)
-        }
+        Loader(isLoading = uiState.isLoading)
 
         DialogCustom(
             errorDialog = uiState.errorDialog,

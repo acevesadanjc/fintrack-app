@@ -111,10 +111,11 @@ class RegisterViewModel(
                 confirmPassword = uiState.value.confirmPassword
             )
             if (validateFields.hasError) {
+                val errorMessage = validateFields.message?.let { getString(it) }.orEmpty()
                 _uiState.update { state ->
                     state.copy(
                         errorDialog = showErrorDialog(
-                            validateFields.message.orEmpty()
+                            errorMessage
                         )
                     )
                 }

@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Email
@@ -23,6 +24,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
@@ -57,6 +59,7 @@ fun LoginContainer(
     onRegisterClick: () -> Unit = {}
 ) {
     val scrollState = rememberScrollState()
+    val focusManager = LocalFocusManager.current
 
     Column(
         modifier = Modifier
@@ -126,7 +129,12 @@ fun LoginContainer(
             trailingIconActive = Icons.Filled.Visibility,
             trailingIconInActive = Icons.Filled.VisibilityOff,
             keyboardType = KeyboardType.Password,
-            imeAction = ImeAction.Next,
+            imeAction = ImeAction.Done,
+            keyboardActions = KeyboardActions(
+                onAny = {
+                    focusManager.clearFocus()
+                }
+            ),
         )
         Spacer(modifier = Modifier.height(Dimens.height24))
 
