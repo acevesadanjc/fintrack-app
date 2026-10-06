@@ -16,13 +16,11 @@ import course.shared.generated.resources.Res
 import course.shared.generated.resources.accept
 import course.shared.generated.resources.error
 import course.shared.generated.resources.please_try_again_later
-import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.onStart
-import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.getString
@@ -35,20 +33,15 @@ class LoginViewModel(
     private val useCaseLocal: LoginLocalUseCase,
 ): ViewModel() {
 
-    private var _uiState = MutableStateFlow(LoginUiState())
-    val uiState: StateFlow<LoginUiState> = _uiState.asStateFlow()
-
-    private val _uiEffect = Channel<LoginUiEffect>()
-    val uiEffect = _uiEffect.receiveAsFlow()
-
-    private fun sendEffect(effect: LoginUiEffect) {
-        viewModelScope.launch {
-            _uiEffect.send(effect)
-        }
-    }
+    private val _loginUiState = MutableStateFlow(LoginUiState())
+    val loginUiState: StateFlow<LoginUiState> = _loginUiState.asStateFlow()
+/*
+    private val _loginUiEvent = MutableStateFlow<LoginUiEvent>(LoginUiEvent.Idle)
+    val loginUiEvent: StateFlow<LoginUiEvent> = _loginUiEvent.asStateFlow()
+*/
 
     fun initStates() {
-        _uiState.update { state ->
+        _loginUiState.update { state ->
             state.copy(
                 email = "test010@gmail.com",
                 password = "Testing123*",
@@ -58,36 +51,44 @@ class LoginViewModel(
 
     fun onEvent(event: LoginUiEvent) {
         when (event) {
+            is LoginUiEvent.Idle -> {}
             is LoginUiEvent.OnEmailChanged -> updateEmail(event.email)
             is LoginUiEvent.OnPasswordChanged -> updatePassword(event.password)
-            is LoginUiEvent.OnTogglePasswordVisibility -> updatePasswordVisible(uiState.value.isPasswordVisible.not())
+            is LoginUiEvent.OnTogglePasswordVisibility -> updatePasswordVisible(loginUiState.value.isPasswordVisible.not())
             is LoginUiEvent.OnLoginClicked -> validateFields()
-            is LoginUiEvent.OnRegisterClicked -> sendEffect(LoginUiEffect.OnNavigateToRegister)
+            is LoginUiEvent.OnRegisterClicked -> {
+               //_loginUiEvent.value = LoginUiEvent.OnRegisterClicked
+                _loginUiState.update { state -> state.copy(navigationTarget = LoginNavigationTarget.Register) }
+            }
             is LoginUiEvent.OnDismissErrorDialog -> dismissDialog()
+            is LoginUiEvent.OnSuccessLogin -> {}
+            is LoginUiEvent.NavigationHandled -> {
+                _loginUiState.update { state -> state.copy(navigationTarget = null) }
+            }
         }
     }
 
     private fun updateEmail(email: String) = viewModelScope.launch {
-        _uiState.update { state -> state.copy(email = email) }
+        _loginUiState.update { state -> state.copy(email = email) }
     }
 
     private fun updatePassword(password: String) = viewModelScope.launch {
-        _uiState.update { state -> state.copy(password = password) }
+        _loginUiState.update { state -> state.copy(password = password) }
     }
 
     private fun updatePasswordVisible(isPasswordVisible: Boolean) = viewModelScope.launch {
-        _uiState.update { state -> state.copy(isPasswordVisible = isPasswordVisible) }
+        _loginUiState.update { state -> state.copy(isPasswordVisible = isPasswordVisible) }
     }
 
 
     private fun validateFields() {
         viewModelScope.launch {
             val validateFields = validationsUseCase.invoke(
-                password = uiState.value.password
+                password = loginUiState.value.password
             )
             if (validateFields.hasError) {
                 val errorMessage = validateFields.message?.let { getString(it) }.orEmpty()
-                _uiState.update { state ->
+                _loginUiState.update { state ->
                     state.copy(
                         errorDialog = showErrorDialog(
                             errorMessage
@@ -102,12 +103,12 @@ class LoginViewModel(
 
     private fun login() = viewModelScope.launch {
         useCaseRemote.login(
-            email = uiState.value.email,
-            password = uiState.value.password
+            email = loginUiState.value.email,
+            password = loginUiState.value.password
         ).onStart {
-            _uiState.update { state -> state.copy(isLoading = StatusLoading.SHOW_LOADING) }
+            _loginUiState.update { state -> state.copy(isLoading = StatusLoading.SHOW_LOADING) }
         }.catch {
-            _uiState.update { state ->
+            _loginUiState.update { state ->
                 state.copy(
                     isLoading = StatusLoading.DISMISS_LOADING,
                     errorDialog = showErrorDialog(),
@@ -119,7 +120,7 @@ class LoginViewModel(
                     saveAccessToken(accessToken = result.response.accessToken)
                 }
                 is NetworkResult.Error -> {
-                    _uiState.update { state ->
+                    _loginUiState.update { state ->
                         state.copy(
                             isLoading = StatusLoading.DISMISS_LOADING,
                             errorDialog = showErrorDialog(result.message),
@@ -132,15 +133,16 @@ class LoginViewModel(
 
     private fun saveAccessToken(accessToken: String) = viewModelScope.launch {
         useCaseLocal.saveAccessToken(accessToken = accessToken).catch {
-            _uiState.update { state ->
+            _loginUiState.update { state ->
                 state.copy(
                     isLoading = StatusLoading.DISMISS_LOADING,
                     errorDialog = showErrorDialog(),
                 )
             }
         }.collect {
-            _uiState.update { state -> state.copy(isLoading = StatusLoading.DISMISS_LOADING) }
-            sendEffect(LoginUiEffect.OnLoginSuccess)
+            _loginUiState.update { state -> state.copy(isLoading = StatusLoading.DISMISS_LOADING) }
+            //_loginUiEvent.value = LoginUiEvent.OnSuccessLogin
+            _loginUiState.update { state -> state.copy(navigationTarget = LoginNavigationTarget.Home) }
         }
     }
 
@@ -151,6 +153,10 @@ class LoginViewModel(
     )
 
     private fun dismissDialog() = viewModelScope.launch {
-        _uiState.update { state -> state.copy(errorDialog = null) }
+        _loginUiState.update { state -> state.copy(errorDialog = null) }
+    }
+
+    fun resetUiEvent() {
+        //_loginUiEvent.value = LoginUiEvent.Idle
     }
 }

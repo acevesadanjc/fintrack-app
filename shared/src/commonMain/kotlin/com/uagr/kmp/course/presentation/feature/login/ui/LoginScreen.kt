@@ -14,13 +14,14 @@ import com.uagr.kmp.course.presentation.component.container.SafeScreenContainer
 import com.uagr.kmp.course.presentation.component.container.SafeScreenContainerTest
 import com.uagr.kmp.course.presentation.component.dialog.DialogCustom
 import com.uagr.kmp.course.presentation.component.loader.Loader
-import com.uagr.kmp.course.presentation.feature.login.viewmodel.LoginUiEffect
+import com.uagr.kmp.course.presentation.feature.login.viewmodel.LoginNavigationTarget
 import com.uagr.kmp.course.presentation.feature.login.viewmodel.LoginUiEvent
 import com.uagr.kmp.course.presentation.feature.login.viewmodel.LoginUiState
 import com.uagr.kmp.course.presentation.feature.login.viewmodel.LoginViewModel
 import com.uagr.kmp.course.presentation.theme.AppTheme
-import com.uagr.kmp.course.utils.operators.StatusLoading
 import org.koin.compose.viewmodel.koinViewModel
+import com.uagr.kmp.course.utils.flow.CollectWithLifecycle
+
 
 @Composable
 fun LoginScreen(
@@ -28,16 +29,34 @@ fun LoginScreen(
     onNavigateToRegister: () -> Unit = {},
     onNavigateToHome: () -> Unit = {},
 ) {
-    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+    val uiState by viewModel.loginUiState.collectAsStateWithLifecycle()
 
-    LaunchedEffect(viewModel.uiEffect) {
-        viewModel.uiEffect.collect { effect ->
-            when (effect) {
-                is LoginUiEffect.OnLoginSuccess -> onNavigateToHome()
-                is LoginUiEffect.OnNavigateToRegister -> onNavigateToRegister()
+    LaunchedEffect(uiState.navigationTarget) {
+        uiState.navigationTarget?.let { target ->
+            when (target) {
+                is LoginNavigationTarget.Home -> onNavigateToHome()
+                is LoginNavigationTarget.Register -> onNavigateToRegister()
             }
+            viewModel.onEvent(LoginUiEvent.NavigationHandled)
         }
     }
+
+    /*
+    viewModel.loginUiEvent.CollectWithLifecycle { event ->
+        when (event) {
+            is LoginUiEvent.Idle -> {}
+            is LoginUiEvent.OnSuccessLogin -> {
+                viewModel.resetUiEvent()
+                onNavigateToHome()
+            }
+            is LoginUiEvent.OnRegisterClicked -> {
+                viewModel.resetUiEvent()
+                onNavigateToRegister()
+            }
+            else -> {}
+        }
+    }
+    */
 
     viewModel.initStates()
 
