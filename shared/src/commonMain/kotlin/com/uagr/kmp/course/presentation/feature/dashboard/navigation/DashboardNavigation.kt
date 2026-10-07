@@ -14,8 +14,6 @@ data object HomeNavigation : Screen {
     @Composable
     override fun Content() {
         val navigator = LocalNavigator.currentOrThrow
-        DashboardScreen {
-            //navigator.pop()
-        }
+        DashboardScreen()
     }
 }

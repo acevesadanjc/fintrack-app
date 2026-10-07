@@ -16,10 +16,10 @@ object NetworkUrl {
     const val REGISTER_ENDPOINT = "/api/v1/auth/register"
     // GET Obtener la información del usuario autenticado, incluyendo su perfil y detalles personales.
     const val ME_ENDPOINT = "/api/v1/users/me"
-
     // Crear/enlazar cuenta bancaria a un usuario.
     const val ACCOUNTS_ENDPOINT = "/api/v1/accounts"
-
+    // Obtener datos de cuentas de usuario.
+    const val GET_ACCOUNTS_ENDPOINT = "/api/v1/accounts"
 
     // Obtener la vista de la situación financiera del usuario.
     const val DASHBOARD_ENDPOINT = "/api/v1/dashboard"

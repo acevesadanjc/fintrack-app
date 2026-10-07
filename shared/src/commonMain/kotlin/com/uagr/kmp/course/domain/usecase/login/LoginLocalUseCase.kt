@@ -23,7 +23,7 @@ class LoginLocalUseCase(
 
     fun saveAccessToken(
         accessToken: String
-    ): Flow<Unit> = repository.saveAccessToken(accessToken = accessToken.orEmpty())
+    ): Flow<Unit> = repository.saveAccessToken(accessToken = accessToken)
 
 
     fun deleteAndInsertUser(

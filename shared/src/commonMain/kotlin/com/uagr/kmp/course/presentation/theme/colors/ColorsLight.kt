@@ -60,6 +60,8 @@ val textBlueSmallLight = Color(0xFF0F459E)
 val textLinkLight = Color(0xFF1470D1)
 val textPlaceholderLight = Color(0xFFA1A1A1)
 val textFieldLabelLight = Color(0xFF1F242E)
+val positiveTrendLight = Color(0xFF17A36E)
+val negativeTrendLight = Color(0xFFE5454D)
 
 // --- Dark Backgrounds Colors ---
 val backgroundBlackLight = Color(0xFF000000)
@@ -131,6 +133,8 @@ val lightModeAppColors = AppColors(
         fieldLabel = textFieldLabelLight,
         placeholder = textPlaceholderLight,
         link = textLinkLight,
+        positiveTrend = positiveTrendLight,
+        negativeTrend = negativeTrendLight
     ),
     backgrounds = ColorBackgrounds(
         black = backgroundBlackLight,

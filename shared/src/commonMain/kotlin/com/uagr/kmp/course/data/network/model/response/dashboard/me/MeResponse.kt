@@ -1,3 +1,7 @@
+/*
+ * MeResponse.kt
+ * Copyright (c) 2026. All rights reserved
+ */
 package com.uagr.kmp.course.data.network.model.response.dashboard.me
 
 import com.uagr.kmp.course.data.network.model.response.base.BaseResponse

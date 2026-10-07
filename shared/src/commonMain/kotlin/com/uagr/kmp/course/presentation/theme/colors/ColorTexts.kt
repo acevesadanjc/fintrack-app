@@ -16,4 +16,6 @@ data class ColorTexts(
     val fieldLabel: Color = Color.Unspecified,
     val placeholder: Color = Color.Unspecified,
     val link: Color = Color.Unspecified,
+    val positiveTrend: Color = Color.Unspecified,
+    val negativeTrend: Color = Color.Unspecified
 )

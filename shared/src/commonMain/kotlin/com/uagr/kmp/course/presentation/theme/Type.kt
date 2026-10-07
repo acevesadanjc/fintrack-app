@@ -114,10 +114,19 @@ data class AppTypography(
     val bodySmall: TextStyle,
     val bodySmallSemiBold: TextStyle,
     val bodySmallBold: TextStyle,
+    // 15
+    val bodyNormalExtra: TextStyle,
+    val bodyNormalExtraSemiBold: TextStyle,
+    val bodyNormalExtraBold: TextStyle,
     // 16
     val bodyNormal: TextStyle,
     val bodyNormalSemiBold: TextStyle,
     val bodyNormalBold: TextStyle,
+    // 18
+    val bodyMediumExtra: TextStyle,
+    val bodyMediumExtraSemiBold: TextStyle,
+    val bodyMediumExtraBold: TextStyle,
+
     // 20
     val bodyMedium: TextStyle,
     val bodyMediumSemiBold: TextStyle,
@@ -126,10 +135,18 @@ data class AppTypography(
     val bodyBig: TextStyle,
     val bodyBigSemiBold: TextStyle,
     val bodyBigBold: TextStyle,
+    // 25
+    val bodyBigExtraMicro: TextStyle,
+    val bodyBigExtraMicroSemiBold: TextStyle,
+    val bodyBigExtraMicroBold: TextStyle,
     // 32
     val bodyBigExtra: TextStyle,
     val bodyBigExtraSemiBold: TextStyle,
     val bodyBigExtraBold: TextStyle,
+    // 34
+    val bodyBigExtraLarge: TextStyle,
+    val bodyBigExtraLargeSemiBold: TextStyle,
+    val bodyBigExtraLargeBold: TextStyle,
     // 40
     val bodyLarge: TextStyle,
     val bodyLargeSemiBold: TextStyle,
@@ -158,6 +175,10 @@ val appTypography
         bodySmallExtraSemiBold = TextStyle(fontFamily = fontFamily, fontSize = Dimens.textSizeExtraSmall, fontWeight = FontWeight.SemiBold),
         bodySmallExtraBold = TextStyle(fontFamily = fontFamily, fontSize = Dimens.textSizeExtraSmall, fontWeight = FontWeight.Bold),
 
+        bodyNormalExtra = TextStyle(fontFamily = fontFamily, fontSize = Dimens.textSizeExtraNormal, fontWeight = FontWeight.Normal),
+        bodyNormalExtraSemiBold = TextStyle(fontFamily = fontFamily, fontSize = Dimens.textSizeExtraNormal, fontWeight = FontWeight.SemiBold),
+        bodyNormalExtraBold = TextStyle(fontFamily = fontFamily, fontSize = Dimens.textSizeExtraNormal, fontWeight = FontWeight.Bold),
+
         bodySmall = TextStyle(fontFamily = fontFamily, fontSize = Dimens.textSizeSmall, fontWeight = FontWeight.Normal),
         bodySmallSemiBold = TextStyle(fontFamily = fontFamily, fontSize = Dimens.textSizeSmall, fontWeight = FontWeight.SemiBold),
         bodySmallBold = TextStyle(fontFamily = fontFamily, fontSize = Dimens.textSizeSmall, fontWeight = FontWeight.Bold),
@@ -165,6 +186,10 @@ val appTypography
         bodyNormal = TextStyle(fontFamily = fontFamily, fontSize = Dimens.textSizeNormal, fontWeight = FontWeight.Normal),
         bodyNormalSemiBold = TextStyle(fontFamily = fontFamily, fontSize = Dimens.textSizeNormal, fontWeight = FontWeight.SemiBold),
         bodyNormalBold = TextStyle(fontFamily = fontFamily, fontSize = Dimens.textSizeNormal, fontWeight = FontWeight.Bold),
+
+        bodyMediumExtra = TextStyle(fontFamily = fontFamily, fontSize = Dimens.textSizeMediumExtra, fontWeight = FontWeight.Normal),
+        bodyMediumExtraSemiBold = TextStyle(fontFamily = fontFamily, fontSize = Dimens.textSizeMediumExtra, fontWeight = FontWeight.SemiBold),
+        bodyMediumExtraBold = TextStyle(fontFamily = fontFamily, fontSize = Dimens.textSizeMediumExtra, fontWeight = FontWeight.Bold),
 
         bodyMedium = TextStyle(fontFamily = fontFamily, fontSize = Dimens.textSizeMedium, fontWeight = FontWeight.Normal),
         bodyMediumSemiBold = TextStyle(fontFamily = fontFamily, fontSize = Dimens.textSizeMedium, fontWeight = FontWeight.SemiBold),
@@ -174,9 +199,17 @@ val appTypography
         bodyBigSemiBold = TextStyle(fontFamily = fontFamily, fontSize = Dimens.textSizeBig, fontWeight = FontWeight.SemiBold),
         bodyBigBold = TextStyle(fontFamily = fontFamily, fontSize = Dimens.textSizeBig, fontWeight = FontWeight.Bold),
 
+        bodyBigExtraMicro = TextStyle(fontFamily = fontFamily, fontSize = Dimens.textSizeBigExtraMicro, fontWeight = FontWeight.Medium),
+        bodyBigExtraMicroSemiBold = TextStyle(fontFamily = fontFamily, fontSize = Dimens.textSizeBigExtraMicro, fontWeight = FontWeight.SemiBold),
+        bodyBigExtraMicroBold = TextStyle(fontFamily = fontFamily, fontSize = Dimens.textSizeBigExtraMicro, fontWeight = FontWeight.Bold),
+
         bodyBigExtra = TextStyle(fontFamily = fontFamily, fontSize = Dimens.textSizeBigExtra, fontWeight = FontWeight.Medium),
         bodyBigExtraSemiBold = TextStyle(fontFamily = fontFamily, fontSize = Dimens.textSizeBigExtra, fontWeight = FontWeight.SemiBold),
         bodyBigExtraBold = TextStyle(fontFamily = fontFamily, fontSize = Dimens.textSizeBigExtra, fontWeight = FontWeight.Bold),
+
+        bodyBigExtraLarge = TextStyle(fontFamily = fontFamily, fontSize = Dimens.textSizeBigExtraLarge, fontWeight = FontWeight.Medium),
+        bodyBigExtraLargeSemiBold = TextStyle(fontFamily = fontFamily, fontSize = Dimens.textSizeBigExtraLarge, fontWeight = FontWeight.SemiBold),
+        bodyBigExtraLargeBold = TextStyle(fontFamily = fontFamily, fontSize = Dimens.textSizeBigExtraLarge, fontWeight = FontWeight.Bold),
 
         bodyLarge = TextStyle(fontFamily = fontFamily, fontSize = Dimens.textSizeLarge, fontWeight = FontWeight.Medium),
         bodyLargeSemiBold = TextStyle(fontFamily = fontFamily, fontSize = Dimens.textSizeLarge, fontWeight = FontWeight.SemiBold),

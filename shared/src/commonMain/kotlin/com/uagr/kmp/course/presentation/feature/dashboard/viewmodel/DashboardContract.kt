@@ -17,6 +17,7 @@ sealed interface DashboardUiIntent {
 
 data class DashboardUiState(
     val userName: String = "",
+    val accountName: String = "",
     val totalBalance: String = "",
     val totalIncome: String = "",
     val totalExpense: String = "",
@@ -39,9 +40,3 @@ data class TransactionItem(
     val amount: String,
     val isIncome: Boolean
 )
-
-sealed interface DashboardUiEffect {
-    data object OnAssociatedAccount : DashboardUiEffect
-    //data object OnNavigateToRegister : HomeUiEffect
-}
-

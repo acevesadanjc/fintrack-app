@@ -7,6 +7,7 @@ package com.uagr.kmp.course.data.repository.dashboard.accounts
 import com.uagr.kmp.course.data.network.datasource.dashboard.accounts.AccountsRemoteDataSource
 import com.uagr.kmp.course.data.network.model.request.dashboard.accounts.AccountsRequest
 import com.uagr.kmp.course.domain.model.dashboard.accounts.AccountsModel
+import com.uagr.kmp.course.domain.model.dashboard.getaccounts.GetAccountsModel
 import com.uagr.kmp.course.domain.repository.dashboard.accounts.AccountsRepository
 import com.uagr.kmp.course.utils.network.NetworkResult
 import kotlinx.coroutines.CoroutineDispatcher
@@ -30,4 +31,9 @@ class AccountsRepositoryImpl(
         )
     }.flowOn(context = dispatcher)
 
+    override fun getAccounts(): Flow<NetworkResult<GetAccountsModel>> = flow {
+        emit(
+            value = dataSource.getAccounts()
+        )
+    }.flowOn(context = dispatcher)
 }

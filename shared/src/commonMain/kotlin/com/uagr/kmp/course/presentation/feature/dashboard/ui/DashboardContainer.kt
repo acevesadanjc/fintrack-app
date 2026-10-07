@@ -1,5 +1,5 @@
 /*
- * DashboardNavigation.kt
+ * DashboardContainer.kt
  * Copyright (c) 2026. All rights reserved
  */
 package com.uagr.kmp.course.presentation.feature.dashboard.ui
@@ -21,6 +21,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -28,8 +29,12 @@ import com.uagr.kmp.course.presentation.component.card.BalanceCard
 import com.uagr.kmp.course.presentation.component.card.SummaryStatCard
 import com.uagr.kmp.course.presentation.component.container.SafeScreenContainerTest
 import com.uagr.kmp.course.presentation.component.item.TransactionRowItem
+import com.uagr.kmp.course.presentation.component.text.TextButtonCustom
+import com.uagr.kmp.course.presentation.component.text.TextCustom
 import com.uagr.kmp.course.presentation.feature.dashboard.viewmodel.DashboardUiIntent
 import com.uagr.kmp.course.presentation.feature.dashboard.viewmodel.DashboardUiState
+import com.uagr.kmp.course.presentation.theme.AppTheme
+import com.uagr.kmp.course.presentation.theme.Dimens
 import course.shared.generated.resources.Res
 import course.shared.generated.resources.home_Hello
 import course.shared.generated.resources.home_expenses
@@ -38,6 +43,7 @@ import course.shared.generated.resources.home_recent_transactions
 import course.shared.generated.resources.home_savings
 import course.shared.generated.resources.home_this_month
 import course.shared.generated.resources.home_view_all
+import course.shared.generated.resources.login_title
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
@@ -48,48 +54,52 @@ fun DashboardContainer(
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
-            .padding(horizontal = 20.dp)
+            .padding(horizontal = Dimens.height24)
     ) {
         // Saludo y Encabezado
         item {
-            Spacer(modifier = Modifier.height(16.dp))
-            Text(
+            Spacer(modifier = Modifier.height(Dimens.height16))
+            TextCustom(
+                modifier = Modifier.fillMaxWidth(),
+                color = AppTheme.colors.text.gray,
+                style = AppTheme.typography.bodyNormalExtra,
                 text = stringResource(Res.string.home_Hello) + " ${state.userName}",
-                color = Color.Gray,
-                style = MaterialTheme.typography.bodyLarge
+                textAlign = TextAlign.Left
             )
-            Spacer(modifier = Modifier.height(4.dp))
-            Text(
+            Spacer(modifier = Modifier.height(Dimens.height4))
+            TextCustom(
+                modifier = Modifier.fillMaxWidth(),
+                color = AppTheme.colors.text.black,
+                style = AppTheme.typography.bodyBigExtraMicroBold,
                 text = stringResource(Res.string.home_financial_overview),
-                fontSize = 24.sp,
-                fontWeight = FontWeight.Bold,
-                color = Color.Black
+                textAlign = TextAlign.Left
             )
-            Spacer(modifier = Modifier.height(20.dp))
+            Spacer(modifier = Modifier.height(Dimens.height20))
         }
-
         // Tarjeta de Balance Principal
         item {
             BalanceCard(
+                accountName = state.accountName,
                 totalBalance = state.totalBalance,
                 income = state.totalIncome,
                 expense = state.totalExpense
             )
-            Spacer(modifier = Modifier.height(24.dp))
+            Spacer(modifier = Modifier.height(Dimens.height24))
         }
 
         // Sección Este Mes (Gastos y Ahorro)
         item {
-            Text(
+            TextCustom(
+                modifier = Modifier.fillMaxWidth(),
+                color = AppTheme.colors.text.black,
+                style = AppTheme.typography.bodyMediumExtraBold,
                 text = stringResource(Res.string.home_this_month),
-                fontSize = 18.sp,
-                fontWeight = FontWeight.Bold,
-                color = Color.Black
+                textAlign = TextAlign.Left
             )
-            Spacer(modifier = Modifier.height(12.dp))
+            Spacer(modifier = Modifier.height(Dimens.height12))
             Row(
                 modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(12.dp)
+                horizontalArrangement = Arrangement.spacedBy(Dimens.height12)
             ) {
                 SummaryStatCard(
                     title = stringResource(Res.string.home_expenses),
@@ -106,9 +116,8 @@ fun DashboardContainer(
                     modifier = Modifier.weight(1f)
                 )
             }
-            Spacer(modifier = Modifier.height(24.dp))
+            Spacer(modifier = Modifier.height(Dimens.height24))
         }
-
         // Encabezado de Últimos Movimientos
         item {
             Row(
@@ -116,22 +125,24 @@ fun DashboardContainer(
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Text(
+                TextCustom(
+                    modifier = Modifier,
+                    color = AppTheme.colors.text.black,
+                    style = AppTheme.typography.bodyMediumExtraSemiBold,
                     text = stringResource(Res.string.home_recent_transactions),
-                    fontSize = 18.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = Color.Black
+                    textAlign = TextAlign.Left
                 )
-                Text(
+                TextButtonCustom(
+                    modifier = Modifier,
+                    color = AppTheme.colors.primary,
                     text = stringResource(Res.string.home_view_all),
-                    color = Color(0xFF2196F3),
-                    fontWeight = FontWeight.SemiBold,
-                    modifier = Modifier.clickable {
+                    textStyle = AppTheme.typography.bodySmallExtraSemiBold,
+                    onClick = {
                         onIntent(DashboardUiIntent.OnSeeAllTransactionsClicked)
                     }
                 )
             }
-            Spacer(modifier = Modifier.height(8.dp))
+            Spacer(modifier = Modifier.height(Dimens.height8))
         }
 
         // Lista de Transacciones
@@ -144,7 +155,7 @@ fun DashboardContainer(
 
         // Espaciador final para que el último elemento no quede tapado por la barra de navegación flotante
         item {
-            Spacer(modifier = Modifier.height(100.dp))
+            Spacer(modifier = Modifier.height(Dimens.height96))
         }
     }
 }

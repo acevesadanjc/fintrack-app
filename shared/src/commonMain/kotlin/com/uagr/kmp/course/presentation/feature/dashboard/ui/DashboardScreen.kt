@@ -1,5 +1,5 @@
 /*
- * HomeScreen.kt
+ * DashboardScreen.kt
  * Copyright (c) 2026. All rights reserved
  */
 package com.uagr.kmp.course.presentation.feature.dashboard.ui
@@ -9,26 +9,19 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.uagr.kmp.course.core.logger.NapierLogger
-import com.uagr.kmp.course.data.local.datastore.AppDataStore
 import com.uagr.kmp.course.presentation.component.container.SafeScreenContainer
 import com.uagr.kmp.course.presentation.component.container.SafeScreenContainerTest
 import com.uagr.kmp.course.presentation.component.dialog.DialogCustom
 import com.uagr.kmp.course.presentation.component.loader.Loader
-import com.uagr.kmp.course.presentation.feature.dashboard.viewmodel.DashboardUiEffect
 import com.uagr.kmp.course.presentation.feature.dashboard.viewmodel.DashboardUiIntent
 import com.uagr.kmp.course.presentation.feature.dashboard.viewmodel.DashboardUiState
 import com.uagr.kmp.course.presentation.feature.dashboard.viewmodel.DashboardViewModel
-import com.uagr.kmp.course.presentation.feature.dashboard.viewmodel.TransactionItem
 import com.uagr.kmp.course.presentation.theme.AppTheme
-import com.uagr.kmp.course.utils.operators.StatusLoading
-import kotlinx.coroutines.flow.first
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 fun DashboardScreen(
-    viewModel: DashboardViewModel = koinViewModel(),
-    onNavigateToHome: () -> Unit = {},
+    viewModel: DashboardViewModel = koinViewModel()
 ) {
     SafeScreenContainer(isPaddingNeeded = false) {
 
@@ -38,14 +31,7 @@ fun DashboardScreen(
             viewModel.onIntent(DashboardUiIntent.LoadData)
         }
 
-        LaunchedEffect(viewModel.uiEffect) {
-            viewModel.uiEffect.collect { effect ->
-                when (effect) {
-                    is DashboardUiEffect.OnAssociatedAccount -> {}
-                }
-            }
-        }
-
+        /*
         val mockState = DashboardUiState(
             totalBalance = "$24,860.00",
             totalIncome = "+$18,500",
@@ -62,15 +48,13 @@ fun DashboardScreen(
                 TransactionItem("3", "Internet", "18 sep", "Servicios", "-$599", isIncome = false)
             )
         )
-
-        //viewModel.initStates()
+        */
 
         DashboardContainer(
             state = uiState,
             onIntent = { intent ->
                 when (intent) {
                     is DashboardUiIntent.OnSeeAllTransactionsClicked -> { /* Navegar a ver todos */ }
-                    is DashboardUiIntent.OnTransactionClicked -> { /* Navegar a detalle */ }
                     else -> {}
                 }
             }

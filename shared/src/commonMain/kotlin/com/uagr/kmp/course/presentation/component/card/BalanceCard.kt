@@ -13,18 +13,23 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import com.uagr.kmp.course.presentation.component.container.SafeScreenContainerTest
+import com.uagr.kmp.course.presentation.component.text.TextCustom
+import com.uagr.kmp.course.presentation.theme.AppTheme
+import com.uagr.kmp.course.presentation.theme.Dimens
+import course.shared.generated.resources.Res
+import course.shared.generated.resources.home_expenses
+import course.shared.generated.resources.home_income
+import course.shared.generated.resources.home_total_balance
+import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun BalanceCard(
+    accountName: String,
     totalBalance: String,
     income: String,
     expense: String,
@@ -32,52 +37,61 @@ fun BalanceCard(
 ) {
     Card(
         modifier = modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(24.dp),
+        shape = RoundedCornerShape(Dimens.padding24),
         colors = CardDefaults.cardColors(
-            containerColor = Color(0xFF0D47A1) // Azul corporativo
+            containerColor = AppTheme.colors.text.blueMedium
         )
     ) {
-        Column(modifier = Modifier.padding(24.dp)) {
-            Text(
-                text = "Balance total",
-                color = Color.White.copy(alpha = 0.8f),
-                style = MaterialTheme.typography.bodyMedium
+        Column(modifier = Modifier.padding(Dimens.padding24)) {
+            TextCustom(
+                modifier = Modifier,
+                color = AppTheme.colors.text.white.copy(alpha = 0.8f),
+                style = AppTheme.typography.bodySmallExtra,
+                text = accountName,
+                textAlign = TextAlign.Left
             )
-            Spacer(modifier = Modifier.height(8.dp))
-            Text(
+            Spacer(modifier = Modifier.height(Dimens.height8))
+            TextCustom(
+                modifier = Modifier,
+                color = AppTheme.colors.text.white,
+                style = AppTheme.typography.bodyBigExtraLargeBold,
                 text = totalBalance,
-                color = Color.White,
-                fontSize = 32.sp,
-                fontWeight = FontWeight.Bold
+                textAlign = TextAlign.Left
             )
-            Spacer(modifier = Modifier.height(24.dp))
+            Spacer(modifier = Modifier.height(Dimens.height24))
             Row(modifier = Modifier.fillMaxWidth()) {
                 Column(modifier = Modifier.weight(1f)) {
-                    Text(
-                        text = "Ingresos",
-                        color = Color.White.copy(alpha = 0.8f),
-                        style = MaterialTheme.typography.bodySmall
+                    TextCustom(
+                        modifier = Modifier,
+                        color = AppTheme.colors.text.white.copy(alpha = 0.8f),
+                        style = AppTheme.typography.bodySmallExtra,
+                        text = stringResource(Res.string.home_income),
+                        textAlign = TextAlign.Left
                     )
-                    Spacer(modifier = Modifier.height(4.dp))
-                    Text(
+                    Spacer(modifier = Modifier.height(Dimens.height4))
+                    TextCustom(
+                        modifier = Modifier,
+                        color = AppTheme.colors.text.white,
+                        style = AppTheme.typography.bodySmallSemiBold,
                         text = income,
-                        color = Color.White,
-                        fontWeight = FontWeight.SemiBold,
-                        style = MaterialTheme.typography.bodyLarge
+                        textAlign = TextAlign.Left
                     )
                 }
                 Column(modifier = Modifier.weight(1f)) {
-                    Text(
-                        text = "Gastos",
-                        color = Color.White.copy(alpha = 0.8f),
-                        style = MaterialTheme.typography.bodySmall
+                    TextCustom(
+                        modifier = Modifier,
+                        color = AppTheme.colors.text.white.copy(alpha = 0.8f),
+                        style = AppTheme.typography.bodySmallExtra,
+                        text = stringResource(Res.string.home_expenses),
+                        textAlign = TextAlign.Left
                     )
-                    Spacer(modifier = Modifier.height(4.dp))
-                    Text(
+                    Spacer(modifier = Modifier.height(Dimens.height4))
+                    TextCustom(
+                        modifier = Modifier,
+                        color = AppTheme.colors.text.white,
+                        style = AppTheme.typography.bodySmallSemiBold,
                         text = expense,
-                        color = Color.White,
-                        fontWeight = FontWeight.SemiBold,
-                        style = MaterialTheme.typography.bodyLarge
+                        textAlign = TextAlign.Left
                     )
                 }
             }
@@ -88,9 +102,12 @@ fun BalanceCard(
 @Composable
 @Preview
 private fun BalanceCardPreview() {
-    BalanceCard(
-        totalBalance = "$24,860.00",
-        income = "+$18,500",
-        expense = "-$8,460"
-    )
+    SafeScreenContainerTest() {
+        BalanceCard(
+            accountName = "Cuenta debito",
+            totalBalance = "$24,860.00",
+            income = "+$18,500",
+            expense = "-$8,460"
+        )
+    }
 }

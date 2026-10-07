@@ -25,9 +25,19 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.uagr.kmp.course.presentation.component.container.SafeScreenContainerTest
+import com.uagr.kmp.course.presentation.component.text.TextCustom
+import com.uagr.kmp.course.presentation.feature.dashboard.ui.DashboardContainer
+import com.uagr.kmp.course.presentation.feature.dashboard.viewmodel.DashboardUiState
+import com.uagr.kmp.course.presentation.theme.AppTheme
+import com.uagr.kmp.course.presentation.theme.Dimens
+import course.shared.generated.resources.Res
+import course.shared.generated.resources.home_this_month
+import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun SummaryStatCard(
@@ -39,37 +49,41 @@ fun SummaryStatCard(
 ) {
     Card(
         modifier = modifier,
-        shape = RoundedCornerShape(20.dp),
+        shape = RoundedCornerShape(Dimens.height20),
         colors = CardDefaults.cardColors(containerColor = Color.White)
     ) {
-        Column(modifier = Modifier.padding(16.dp)) {
-            Text(
+        Column(modifier = Modifier.padding(Dimens.padding16)) {
+            TextCustom(
+                modifier = Modifier,
+                color = AppTheme.colors.text.gray,
+                style = AppTheme.typography.bodySmallExtra,
                 text = title,
-                color = Color.Gray,
-                style = MaterialTheme.typography.bodyMedium
+                textAlign = TextAlign.Left
             )
-            Spacer(modifier = Modifier.height(8.dp))
-            Text(
+            Spacer(modifier = Modifier.height(Dimens.height8))
+            TextCustom(
+                modifier = Modifier,
+                color = AppTheme.colors.text.black,
+                style = AppTheme.typography.bodyBigBold,
                 text = amount,
-                fontSize = 22.sp,
-                fontWeight = FontWeight.Bold,
-                color = Color.Black
+                textAlign = TextAlign.Left
             )
-            Spacer(modifier = Modifier.height(8.dp))
+            Spacer(modifier = Modifier.height(Dimens.height8))
             Row(verticalAlignment = Alignment.CenterVertically) {
-                val trendColor = if (isPositiveTrend) Color(0xFF4CAF50) else Color(0xFFE53935)
+                val trendColor = if (isPositiveTrend) AppTheme.colors.text.positiveTrend else AppTheme.colors.text.negativeTrend
                 Icon(
                     imageVector = if (isPositiveTrend) Icons.Default.ArrowUpward else Icons.Default.ArrowDownward,
                     contentDescription = null,
                     tint = trendColor,
-                    modifier = Modifier.height(14.dp)
+                    modifier = Modifier.height(Dimens.height14)
                 )
-                Spacer(modifier = Modifier.width(4.dp))
-                Text(
-                    text = percentage,
+                Spacer(modifier = Modifier.width(Dimens.width4))
+                TextCustom(
+                    modifier = Modifier,
                     color = trendColor,
-                    fontSize = 12.sp,
-                    fontWeight = FontWeight.Bold
+                    style = AppTheme.typography.bodySmallExtraSemiBold,
+                    text = percentage,
+                    textAlign = TextAlign.Left
                 )
             }
         }
@@ -79,10 +93,12 @@ fun SummaryStatCard(
 @Composable
 @Preview
 private fun SummaryStatCardPreview() {
-    SummaryStatCard(
-        title = "Balance total",
-        amount = "$24,860.00",
-        percentage = "+12.5%",
-        isPositiveTrend = true
-    )
+    SafeScreenContainerTest( backgroundColor = AppTheme.colors.text.black) {
+        SummaryStatCard(
+            title = "Balance total",
+            amount = "$24,860.00",
+            percentage = "+12.5%",
+            isPositiveTrend = true
+        )
+    }
 }
