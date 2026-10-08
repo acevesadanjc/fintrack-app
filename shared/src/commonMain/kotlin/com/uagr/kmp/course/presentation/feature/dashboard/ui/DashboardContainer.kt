@@ -144,9 +144,8 @@ fun DashboardContainer(
             )
         }
 
-        // Espaciador final para que el último elemento no quede tapado por la barra de navegación flotante
         item {
-            Spacer(modifier = Modifier.height(Dimens.height96))
+            Spacer(modifier = Modifier.height(Dimens.height16))
         }
     }
 }

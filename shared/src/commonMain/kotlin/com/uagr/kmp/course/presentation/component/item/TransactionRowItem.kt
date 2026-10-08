@@ -21,6 +21,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
+import com.uagr.kmp.course.presentation.component.container.SafeScreenContainerTest
 import com.uagr.kmp.course.presentation.component.text.TextCustom
 import com.uagr.kmp.course.presentation.feature.dashboard.viewmodel.TransactionItem
 import com.uagr.kmp.course.presentation.theme.AppTheme
@@ -81,7 +82,7 @@ fun TransactionRowItem(
         // Amount
         TextCustom(
             modifier = Modifier,
-            color = if (transaction.isIncome) AppTheme.colors.text.negativeTrend else AppTheme.colors.text.positiveTrend,
+            color = if (transaction.isIncome) AppTheme.colors.text.positiveTrend else AppTheme.colors.text.negativeTrend,
             style = AppTheme.typography.bodySmallSemiBold,
             text = transaction.amount,
             textAlign = TextAlign.Left
@@ -92,15 +93,17 @@ fun TransactionRowItem(
 @Composable
 @Preview
 private fun BalanceCardPreview() {
-    TransactionRowItem(
-        transaction = TransactionItem(
-            id = "1",
-            title = "Salario",
-            date = "2024-06-01",
-            category = "Ingresos",
-            amount = "+$3,000.00",
-            isIncome = true
-        ),
-        onClick = {}
-    )
+    SafeScreenContainerTest {
+        TransactionRowItem(
+            transaction = TransactionItem(
+                id = "1",
+                title = "Salario",
+                date = "2024-06-01",
+                category = "Ingresos",
+                amount = "+$3,000.00",
+                isIncome = true
+            ),
+            onClick = {}
+        )
+    }
 }
