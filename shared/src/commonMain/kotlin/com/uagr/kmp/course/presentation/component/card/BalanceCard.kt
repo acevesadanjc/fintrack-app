@@ -21,6 +21,7 @@ import com.uagr.kmp.course.presentation.component.container.SafeScreenContainerT
 import com.uagr.kmp.course.presentation.component.text.TextCustom
 import com.uagr.kmp.course.presentation.theme.AppTheme
 import com.uagr.kmp.course.presentation.theme.Dimens
+import com.uagr.kmp.course.utils.functions.toCurrency
 import course.shared.generated.resources.Res
 import course.shared.generated.resources.home_expenses
 import course.shared.generated.resources.home_income
@@ -29,7 +30,6 @@ import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun BalanceCard(
-    accountName: String,
     totalBalance: String,
     income: String,
     expense: String,
@@ -47,7 +47,7 @@ fun BalanceCard(
                 modifier = Modifier,
                 color = AppTheme.colors.text.white.copy(alpha = 0.8f),
                 style = AppTheme.typography.bodySmallExtra,
-                text = accountName,
+                text = stringResource(Res.string.home_total_balance),
                 textAlign = TextAlign.Left
             )
             Spacer(modifier = Modifier.height(Dimens.height8))
@@ -73,7 +73,7 @@ fun BalanceCard(
                         modifier = Modifier,
                         color = AppTheme.colors.text.white,
                         style = AppTheme.typography.bodySmallSemiBold,
-                        text = income,
+                        text = "+${income}",
                         textAlign = TextAlign.Left
                     )
                 }
@@ -90,7 +90,7 @@ fun BalanceCard(
                         modifier = Modifier,
                         color = AppTheme.colors.text.white,
                         style = AppTheme.typography.bodySmallSemiBold,
-                        text = expense,
+                        text = "-${expense}",
                         textAlign = TextAlign.Left
                     )
                 }
@@ -104,10 +104,9 @@ fun BalanceCard(
 private fun BalanceCardPreview() {
     SafeScreenContainerTest() {
         BalanceCard(
-            accountName = "Cuenta debito",
             totalBalance = "$24,860.00",
-            income = "+$18,500",
-            expense = "-$8,460"
+            income = "+18,500",
+            expense = "-8,460"
         )
     }
 }

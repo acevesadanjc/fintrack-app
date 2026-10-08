@@ -70,6 +70,8 @@ val backgroundYellowLight = Color(0xFFFFB700)
 val backgroundBlueLight = Color(0xFF0066FF)
 val dividerLight = Color(0xFFEBEFF9)
 val backgroundProgressIndicatorLight = Color(0x80898989)
+val backgroundPositiveTrendLight = Color(0xFFE5FAF2)
+val backgroundNegativeTrendLight = Color(0xFFFFEDF0)
 
 // -- Navigation Bar --
 val indicatorLight = Color(0xFFE8F0FC)
@@ -134,15 +136,17 @@ val lightModeAppColors = AppColors(
         placeholder = textPlaceholderLight,
         link = textLinkLight,
         positiveTrend = positiveTrendLight,
-        negativeTrend = negativeTrendLight
+        negativeTrend = negativeTrendLight,
     ),
     backgrounds = ColorBackgrounds(
         black = backgroundBlackLight,
         white = backgroundWhiteLight,
         yellow = backgroundYellowLight,
         blue = backgroundBlueLight,
-        indicator = indicatorLight
-    ),
+        indicator = indicatorLight,
+        positiveTrend = backgroundPositiveTrendLight,
+        negativeTrend = backgroundNegativeTrendLight,
+),
     divider = dividerLight,
     backgroundProgressIndicator = backgroundProgressIndicatorLight,
 )

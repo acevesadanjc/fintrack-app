@@ -25,17 +25,13 @@ fun DashboardResponse.toDomain() = DashboardModel(
 fun com.uagr.kmp.course.data.network.model.response.dashboard.dashboard.RecentTransaction.toDomain() =
     RecentTransaction(
         id = id.orEmpty(),
-        accountId = account_id.orEmpty(),
         categoryId = category_id.orEmpty(),
         type = type.orEmpty(),
         amount = amount.orEmpty(),
         currency = currency.orEmpty(),
         description = description.orEmpty(),
-        notes = notes.orEmpty(),
-        transactionDate = transaction_date.orEmpty(),
         createdAt = created_at.orEmpty(),
-        updatedAt = updated_at.orEmpty(),
-        version = version ?: 0
+        updatedAt = updated_at.orEmpty()
     )
 
 fun com.uagr.kmp.course.data.network.model.response.dashboard.dashboard.TopExpenseCategory.toDomain() =

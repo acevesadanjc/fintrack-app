@@ -5,6 +5,7 @@
 package com.uagr.kmp.course.presentation.feature.dashboard.viewmodel
 
 import com.uagr.kmp.course.domain.model.base.ErrorDialogModel
+import com.uagr.kmp.course.domain.model.dashboard.dashboard.RecentTransaction
 import com.uagr.kmp.course.utils.operators.StatusLoading
 
 
@@ -17,20 +18,23 @@ sealed interface DashboardUiIntent {
 
 data class DashboardUiState(
     val userName: String = "",
-    val accountName: String = "",
     val totalBalance: String = "",
-    val totalIncome: String = "",
-    val totalExpense: String = "",
-    val monthlyExpense: String = "",
-    val monthlyExpensePercentage: String = "",
-    val isExpenseDecreasing: Boolean = false,
+    val monthlyIncome: String = "",
+    val monthlyExpenses: String = "",
     val monthlySavings: String = "",
-    val monthlySavingsPercentage: String = "",
-    val isSavingsIncreasing: Boolean = false,
+    val savingsRatePercentage: String = "",
+    val expensesRatePercentage : String = "",
+    val isExpenseDecreasing: Boolean = false,
+    val isSavingsIncreasing: Boolean = true,
     val recentTransactions: List<TransactionItem> = emptyList(),
     val isLoading: StatusLoading = StatusLoading.DISMISS_LOADING,
     val errorDialog: ErrorDialogModel? = null
 )
+/*
+Supermercado description
+-$860  type amount
+Hoy created_at · Alimentación category_id
+*/
 
 data class TransactionItem(
     val id: String,

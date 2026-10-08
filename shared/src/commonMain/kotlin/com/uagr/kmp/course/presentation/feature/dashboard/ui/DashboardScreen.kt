@@ -21,7 +21,8 @@ import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 fun DashboardScreen(
-    viewModel: DashboardViewModel = koinViewModel()
+    viewModel: DashboardViewModel = koinViewModel(),
+    onNavigateToTransaction: () -> Unit = {}
 ) {
     SafeScreenContainer(isPaddingNeeded = false) {
 
@@ -31,30 +32,15 @@ fun DashboardScreen(
             viewModel.onIntent(DashboardUiIntent.LoadData)
         }
 
-        /*
-        val mockState = DashboardUiState(
-            totalBalance = "$24,860.00",
-            totalIncome = "+$18,500",
-            totalExpense = "-$8,460",
-            monthlyExpense = "$8,460",
-            monthlyExpensePercentage = "12%",
-            isExpenseDecreasing = false,
-            monthlySavings = "$3,120",
-            monthlySavingsPercentage = "8%",
-            isSavingsIncreasing = true,
-            recentTransactions = listOf(
-                TransactionItem("1", "Supermercado", "Hoy", "Alimentación", "-$860", isIncome = false),
-                TransactionItem("2", "Nómina", "Ayer", "Ingreso", "+$15,500", isIncome = true),
-                TransactionItem("3", "Internet", "18 sep", "Servicios", "-$599", isIncome = false)
-            )
-        )
-        */
-
         DashboardContainer(
             state = uiState,
             onIntent = { intent ->
                 when (intent) {
-                    is DashboardUiIntent.OnSeeAllTransactionsClicked -> { /* Navegar a ver todos */ }
+                    is DashboardUiIntent.OnSeeAllTransactionsClicked -> {
+                        onNavigateToTransaction()
+                    }
+                    is DashboardUiIntent.OnTransactionClicked -> {
+                    }
                     else -> {}
                 }
             }

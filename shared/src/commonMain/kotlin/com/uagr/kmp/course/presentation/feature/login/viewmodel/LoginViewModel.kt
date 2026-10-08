@@ -35,16 +35,12 @@ class LoginViewModel(
 
     private val _loginUiState = MutableStateFlow(LoginUiState())
     val loginUiState: StateFlow<LoginUiState> = _loginUiState.asStateFlow()
-/*
-    private val _loginUiEvent = MutableStateFlow<LoginUiEvent>(LoginUiEvent.Idle)
-    val loginUiEvent: StateFlow<LoginUiEvent> = _loginUiEvent.asStateFlow()
-*/
 
     fun initStates() {
         _loginUiState.update { state ->
             state.copy(
-                email = "test010@gmail.com",
-                password = "Testing123*",
+                email = "test011@gmail.com",
+                password = "Password123*",
             )
         }
     }
@@ -141,7 +137,6 @@ class LoginViewModel(
             }
         }.collect {
             _loginUiState.update { state -> state.copy(isLoading = StatusLoading.DISMISS_LOADING) }
-            //_loginUiEvent.value = LoginUiEvent.OnSuccessLogin
             _loginUiState.update { state -> state.copy(navigationTarget = LoginNavigationTarget.Home) }
         }
     }
@@ -156,7 +151,4 @@ class LoginViewModel(
         _loginUiState.update { state -> state.copy(errorDialog = null) }
     }
 
-    fun resetUiEvent() {
-        //_loginUiEvent.value = LoginUiEvent.Idle
-    }
 }

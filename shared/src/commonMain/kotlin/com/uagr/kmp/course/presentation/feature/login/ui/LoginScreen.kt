@@ -20,7 +20,6 @@ import com.uagr.kmp.course.presentation.feature.login.viewmodel.LoginUiState
 import com.uagr.kmp.course.presentation.feature.login.viewmodel.LoginViewModel
 import com.uagr.kmp.course.presentation.theme.AppTheme
 import org.koin.compose.viewmodel.koinViewModel
-import com.uagr.kmp.course.utils.flow.CollectWithLifecycle
 
 
 @Composable
@@ -40,23 +39,6 @@ fun LoginScreen(
             viewModel.onEvent(LoginUiEvent.NavigationHandled)
         }
     }
-
-    /*
-    viewModel.loginUiEvent.CollectWithLifecycle { event ->
-        when (event) {
-            is LoginUiEvent.Idle -> {}
-            is LoginUiEvent.OnSuccessLogin -> {
-                viewModel.resetUiEvent()
-                onNavigateToHome()
-            }
-            is LoginUiEvent.OnRegisterClicked -> {
-                viewModel.resetUiEvent()
-                onNavigateToRegister()
-            }
-            else -> {}
-        }
-    }
-    */
 
     viewModel.initStates()
 
