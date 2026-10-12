@@ -12,6 +12,7 @@ import com.uagr.kmp.course.domain.usecase.dashboard.accounts.AccountsUseCase
 import com.uagr.kmp.course.domain.usecase.dashboard.dashboard.DashboardUseCase
 import com.uagr.kmp.course.domain.usecase.dashboard.dashboard.DashboardValidationsUseCase
 import com.uagr.kmp.course.domain.usecase.dashboard.me.MeUseCase
+import com.uagr.kmp.course.presentation.component.item.TransactionItem
 import com.uagr.kmp.course.utils.network.NetworkResult
 import com.uagr.kmp.course.utils.operators.StatusLoading
 import course.shared.generated.resources.Res
@@ -112,7 +113,10 @@ class DashboardViewModel(
                                 date = transaction.updatedAt,
                                 category = transaction.categoryId,
                                 amount = useCaseDashboardValidations.addPositiveOrNegativeSign(
-                                    value = useCaseDashboardValidations.toCurrency(transaction.amount, false),
+                                    value = useCaseDashboardValidations.toCurrency(
+                                        transaction.amount,
+                                        false
+                                    ),
                                     type = transaction.type
                                 ),
                                 isIncome = useCaseDashboardValidations.isIncome(transaction.type)

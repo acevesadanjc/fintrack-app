@@ -25,7 +25,7 @@ class MeRemoteDataSourceImpl(
     override suspend fun getMe(): NetworkResult<MeModel> =
         safeApiCall(
             apiCall = {
-                httpClient.get(urlString = NetworkUrl.ME_ENDPOINT) {
+                httpClient.get(urlString = NetworkUrl.GET_ME_ENDPOINT) {
                     contentType(type = ContentType.Application.Json)
                 }
             },

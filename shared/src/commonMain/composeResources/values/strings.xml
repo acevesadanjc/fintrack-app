@@ -77,4 +77,13 @@
     <string name="home_view_all">Ver todos</string>
 
 
+    <!-- Transactions -->
+    <string name="transactions">Transactions</string>
+    <string name="transactions_title">Movimientos</string>
+    <string name="transactions_filter_all">Todos</string>
+    <string name="transactions_filter_income">Ingresos</string>
+    <string name="transactions_filter_expense">Gastos</string>
+    <string name="transactions_search">Buscar movimiento...</string>
+
+
 </resources>

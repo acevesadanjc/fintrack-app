@@ -23,7 +23,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import com.uagr.kmp.course.presentation.component.container.SafeScreenContainerTest
 import com.uagr.kmp.course.presentation.component.text.TextCustom
-import com.uagr.kmp.course.presentation.feature.dashboard.viewmodel.TransactionItem
 import com.uagr.kmp.course.presentation.theme.AppTheme
 import com.uagr.kmp.course.presentation.theme.Dimens
 
@@ -40,6 +39,7 @@ fun TransactionRowItem(
             .padding(vertical = Dimens.padding12),
         verticalAlignment = Alignment.CenterVertically
     ) {
+
         // Dot / Icon Container
         val circleBg = if (transaction.isIncome) AppTheme.colors.backgrounds.positiveTrend else AppTheme.colors.backgrounds.negativeTrend
         val dotColor = if (transaction.isIncome) AppTheme.colors.text.positiveTrend else AppTheme.colors.text.negativeTrend

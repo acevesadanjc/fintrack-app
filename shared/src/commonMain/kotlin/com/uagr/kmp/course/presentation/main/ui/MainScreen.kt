@@ -41,6 +41,7 @@ fun MainScreen() {
     TabNavigator(HomeTab) {
         Scaffold(
             topBar = {
+                /*
                 TopAppBar(
                     title = { },
                     actions = { // Icono derecha
@@ -63,6 +64,7 @@ fun MainScreen() {
                         actionIconContentColor = MaterialTheme.colorScheme.background
                     )
                 )
+                */
             },
             bottomBar = {
                 NavigationBar(

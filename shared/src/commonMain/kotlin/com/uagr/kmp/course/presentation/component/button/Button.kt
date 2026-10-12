@@ -6,6 +6,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -16,6 +17,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -23,9 +25,11 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.dp
 import com.uagr.kmp.course.presentation.component.container.SafeScreenContainerTest
 import com.uagr.kmp.course.presentation.component.text.TextCustom
 import com.uagr.kmp.course.presentation.theme.AppTheme
@@ -34,6 +38,8 @@ import course.shared.generated.resources.Res
 import course.shared.generated.resources.example
 import course.shared.generated.resources.ic_back_arrow
 import course.shared.generated.resources.ic_example
+import course.shared.generated.resources.transactions_filter_all
+import course.shared.generated.resources.transactions_title
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
@@ -118,23 +124,46 @@ fun IconButtonCustom(
     )
 }
 
+@Composable
+fun FilterButton(
+    text: String,
+    selected: Boolean,
+    backgroundColorSelectedButton: Color,
+    textColorSelectedButton: Color,
+    backgroundColorNotSelectedButton: Color,
+    textColorNotSelectedButton: Color,
+    onClick: () -> Unit
+) {
+    Button(
+        onClick = onClick,
+        colors = ButtonDefaults.buttonColors(
+            containerColor = if (selected) backgroundColorSelectedButton else backgroundColorNotSelectedButton
+        ),
+        shape = RoundedCornerShape(Dimens.corner20),
+        contentPadding = PaddingValues(horizontal = Dimens.height20, vertical = Dimens.height8),
+        elevation = ButtonDefaults.buttonElevation(0.dp)
+    ) {
+        TextCustom(
+            modifier = Modifier,
+            color = if (selected) textColorSelectedButton else textColorNotSelectedButton,
+            style = AppTheme.typography.bodySmallExtraSemiBold,
+            text = text,
+            textAlign = TextAlign.Left
+        )
+    }
+}
+
+
+
 @Preview(showBackground = true)
 @Composable
 private fun ButtonCustomPreview() {
     SafeScreenContainerTest {
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(all = Dimens.padding16),
-            verticalArrangement = Arrangement.spacedBy(Dimens.padding16),
-        ) {
-
-            ButtonCustom(
-                backgroundButton = AppTheme.colors.primary,
-                textColor = AppTheme.colors.backgrounds.white,
-                text = stringResource(Res.string.example),
-            )
-        }
+        ButtonCustom(
+            backgroundButton = AppTheme.colors.primary,
+            textColor = AppTheme.colors.backgrounds.white,
+            text = stringResource(Res.string.example)
+        )
     }
 }
 
@@ -142,19 +171,15 @@ private fun ButtonCustomPreview() {
 @Composable
 private fun Button2CustomPreview() {
     SafeScreenContainerTest {
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(all = Dimens.padding16),
-            verticalArrangement = Arrangement.spacedBy(Dimens.padding16),
-        ) {
-
-            ButtonCustom(
-                backgroundButton = AppTheme.colors.primary,
-                textColor = AppTheme.colors.backgrounds.white,
-                text = stringResource(Res.string.example),
-            )
-        }
+        FilterButton(
+            text = stringResource(Res.string.transactions_filter_all),
+            selected = true,
+            backgroundColorSelectedButton = AppTheme.colors.primary,
+            textColorSelectedButton = AppTheme.colors.text.white,
+            backgroundColorNotSelectedButton = AppTheme.colors.text.white,
+            textColorNotSelectedButton = AppTheme.colors.primary,
+            onClick = {}
+        )
     }
 }
 

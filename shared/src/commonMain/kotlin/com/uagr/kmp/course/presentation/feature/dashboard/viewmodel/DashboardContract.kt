@@ -1,11 +1,11 @@
 /*
- * HomeContract.kt
+ * DashboardContract.kt
  * Copyright (c) 2026. All rights reserved
  */
 package com.uagr.kmp.course.presentation.feature.dashboard.viewmodel
 
 import com.uagr.kmp.course.domain.model.base.ErrorDialogModel
-import com.uagr.kmp.course.domain.model.dashboard.dashboard.RecentTransaction
+import com.uagr.kmp.course.presentation.component.item.TransactionItem
 import com.uagr.kmp.course.utils.operators.StatusLoading
 
 
@@ -30,12 +30,8 @@ data class DashboardUiState(
     val isLoading: StatusLoading = StatusLoading.DISMISS_LOADING,
     val errorDialog: ErrorDialogModel? = null
 )
-/*
-Supermercado description
--$860  type amount
-Hoy created_at · Alimentación category_id
-*/
 
+/*
 data class TransactionItem(
     val id: String,
     val title: String,
@@ -44,3 +40,4 @@ data class TransactionItem(
     val amount: String,
     val isIncome: Boolean
 )
+*/

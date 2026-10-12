@@ -23,6 +23,7 @@ import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabOptions
 import cafe.adriel.voyager.transitions.SlideTransition
 import com.uagr.kmp.course.presentation.feature.dashboard.navigation.HomeNavigation
+import com.uagr.kmp.course.presentation.feature.transactions.navigation.TransactionNavigation
 import course.shared.generated.resources.Res
 import course.shared.generated.resources.main_tab_budget
 import course.shared.generated.resources.main_tab_goal
@@ -72,12 +73,9 @@ object TransactionTab: Tab {
 
     @Composable
     override fun Content() {
-        GenericScreen("Transactions Page")
-        /*
         Navigator(screen = TransactionNavigation) { navigator ->
             SlideTransition(navigator)
         }
-        */
     }
 }
 
